@@ -49,12 +49,12 @@ By default, when the `value` is empty, it says 'Not provided'. You have the opti
 ```handlebars
   {{#ember-inline-edit
     value=value
-    emptyLabel='It's empty'
+    emptyLabel='It is empty'
     field='textarea'
     onSave='changeValue'}}
 ```
 
-With this, if the `value` is empty, it will show `It's empty` instead.
+With this, if the `value` is empty, it will show `It is empty` instead.
 
 There's no styling provided by default. Feel free to add your own.
 
