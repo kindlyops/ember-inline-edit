@@ -1,0 +1,23 @@
+{{#if isEditing}}
+  {{#if (in-arr textFields field)}}
+    {{input 
+        type="text" 
+        classNames="ember-inline-edit-input"
+        value=value}} 
+  {{else if (in-arr textAreaFields field)}}
+    {{textarea 
+      classNames="ember-inline-edit-input"
+      value=value}}
+  {{/if}}
+
+  <button {{action "save"}}
+          class="ember-inline-edit-save">
+    Save
+  </button>
+{{else}}
+  {{#if valueIsEmpty}}
+    <div class="gray-text"> Not provided </div>
+  {{else}}
+    {{value}} 
+  {{/if}}
+{{/if}}
