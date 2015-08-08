@@ -60,7 +60,7 @@ There's no styling provided by default. Feel free to add your own.
 
 #### Keyboard Support
 
-Inside the inputs (the textarea, input fields, etc.), if the user hits `esc`, it does exactly what a click on the save button would do (i.e. sends an `onSave` action and closes the editor).
+Inside the inputs (the textarea, input fields, etc.), if the user hits `enter`, it does exactly what a click on the save button would do (i.e. sends an `onSave` action and closes the editor).
 
 If the user hits `esc`, the editor closes _without_ sending the `onSave` action.
 
