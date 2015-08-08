@@ -1,0 +1,11 @@
+.ember-inline-edit {
+  float: left;
+  width: 200px;
+  display: block;
+  font-family: 'Helvetica',
+}
+
+.ember-inline-edit-input {
+  font-size: 15px;
+  padding: .5em 1em;
+}

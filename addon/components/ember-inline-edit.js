@@ -25,15 +25,17 @@ export default Ember.Component.extend({
   valueIsEmpty: computed.empty('value'),
 
   setup: on('didInsertElement', function () {
-    this._handleClicks = this._handleClicks.bind(this)
-    this._setupClickHandlers()
+    this._handleClick = this._handleClick.bind(this)
+    this._handleKeyup = this._handleKeyup.bind(this)
+    this._setupEventHandlers()
   }),
 
-  _setupClickHandlers () {
-    $(document).on('click', this._handleClicks)
+  _setupEventHandlers () {
+    $(document).on('click', this._handleClick)
+    $(this.element).on('keyup', '.ember-inline-edit-input', this._handleKeyup)
   },
 
-  _handleClicks (e) {
+  _handleClick (e) {
     const isEditing = get(this, 'isEditing')
     const editor = $(this.element)
     const target = $(e.target)
@@ -43,6 +45,15 @@ export default Ember.Component.extend({
       set(this, 'isEditing', true)
       this._focusOnInput()
     } else if (!isInside && isEditing) {
+      set(this, 'isEditing', false)
+    }
+  },
+
+  _handleKeyup (e) {
+    const isEditing = get(this, 'isEditing')
+    const isEnter = e.which === 13 || e.keyCode === 13
+
+    if (isEditing && isEnter) {
       set(this, 'isEditing', false)
     }
   },
