@@ -58,6 +58,12 @@ With this, if the `value` is empty, it will show `It is empty` instead.
 
 There's no styling provided by default. Feel free to add your own.
 
+#### Keyboard Support
+
+Inside the inputs (the textarea, input fields, etc.), if the user hits `esc`, it does exactly what a click on the save button would do (i.e. sends an `onSave` action and closes the editor).
+
+If the user hits `esc`, the editor closes _without_ sending the `onSave` action.
+
 ## Issues? Bugs?
 
 Please report any issues or bugs you find. Feel free to send in PRs too.
