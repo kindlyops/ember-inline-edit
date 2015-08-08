@@ -1,7 +1,7 @@
 {
   "name": "ember-inline-edit",
   "version": "0.0.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "inline editing for ember.js apps",
   "directories": {
     "doc": "doc",
     "test": "tests"
