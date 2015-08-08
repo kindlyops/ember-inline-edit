@@ -20,6 +20,7 @@ export default Ember.Component.extend({
 
   field: 'text',
   value: null,
+  emptyLabel: 'Not Provided',
 
   valueIsEmpty: computed.empty('value'),
 
@@ -54,6 +55,10 @@ export default Ember.Component.extend({
     save () {
       this.sendAction('onSave', this.get('value'))
       set(this, 'isEditing', false)
+    },
+
+    setValue (value) {
+      set(this, 'value', value)
     }
   }
 });
