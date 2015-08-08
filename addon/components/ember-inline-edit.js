@@ -52,8 +52,9 @@ export default Ember.Component.extend({
   _handleKeyup (e) {
     const isEditing = get(this, 'isEditing')
     const isEnter = e.which === 13 || e.keyCode === 13
+    const isEsc   = e.which === 27 || e.keyCode === 27
 
-    if (isEditing && isEnter) {
+    if (isEditing && (isEnter || isEsc)) {
       set(this, 'isEditing', false)
     }
   },

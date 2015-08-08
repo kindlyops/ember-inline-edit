@@ -3,8 +3,8 @@ import { module, test } from 'qunit';
 
 module('Unit | Helper | in arr');
 
-// Replace this with your real tests.
 test('it works', function(assert) {
-  var result = inArr(42);
+  const arr = [[1, 2, 15], 15]
+  const result = inArr(arr);
   assert.ok(result);
 });
