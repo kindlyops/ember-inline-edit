@@ -6,8 +6,13 @@ const {
   computed,
   on,
   getWithDefault,
-  run
+  run,
+  Logger
 } = Em
+
+const {
+  info
+} = Logger
 
 export default Ember.Component.extend({
   classNames: ['ember-inline-edit'],
@@ -69,11 +74,13 @@ export default Ember.Component.extend({
 
   actions: {
     save () {
+      info('[ember-inline-edit] Got the `onSave` action')
       this.sendAction('onSave', this.get('value'))
       set(this, 'isEditing', false)
     },
 
     close () {
+      info('[ember-inline-edit] Got the `onClose` action')
       this.sendAction('onClose')
       set(this, 'isEditing', false)
     },
