@@ -11,14 +11,14 @@ ember-inline-edit provides inline editing for your ember apps. Has basic keyboar
 Use the `ember-inline-edit` component and provide it a default value.
 
 ```handlebars
-  {{#ember-inline-edit
+  {{ember-inline-edit
     value=value}}
 ```
 
 This will give you a component that can be edited inline. By default, it is a textfield. You can, however, change the field type. Here's how:
 
 ```handlebars
-  {{#ember-inline-edit
+  {{ember-inline-edit
     value=value
     field='textarea'}}
 ```
@@ -28,7 +28,7 @@ This will make it a textarea. The current supported types are: text, email, phon
 It also exposes an action `onSave` that is called (with the value as an argument) when the user hits save. Here's how that works:
 
 ```handlebars
-  {{#ember-inline-edit
+  {{ember-inline-edit
     value=value
     field='textarea'
     onSave='changeValue'}}
@@ -47,7 +47,7 @@ Inside your route, you can handle the `saveModel` action like this:
 The `onSave` action can also be used with the new closure actions. Here's how:
 
 ```handlebars
-  {{#ember-inline-edit
+  {{ember-inline-edit
     value=value
     field='textarea'
     onSave=(action "changeValue" "attr")}}
@@ -60,7 +60,7 @@ There's an `onClose` action that is called when the editor is closed (either by 
 By default, name the `value` is empty, it says 'Not provided'. You have the option to customize that. Here's how you can do that:
 
 ```handlebars
-  nameember-inline-edit
+  {{ember-inline-edit
     value=value
     emptyLabel='It is empty'
     field='textarea'

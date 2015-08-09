@@ -45,7 +45,7 @@ export default Ember.Component.extend({
       set(this, 'isEditing', true)
       this._focusOnInput()
     } else if (!isInside && isEditing) {
-      set(this, 'isEditing', false)
+      this.send('close')
     }
   },
 
@@ -54,8 +54,12 @@ export default Ember.Component.extend({
     const isEnter = e.which === 13 || e.keyCode === 13
     const isEsc   = e.which === 27 || e.keyCode === 27
 
-    if (isEditing && (isEnter || isEsc)) {
-      set(this, 'isEditing', false)
+    if (!isEditing) return
+
+    if (isEnter) {
+      this.send('save')
+    } else if (isEsc) {
+      this.send('close')
     }
   },
 
@@ -66,6 +70,11 @@ export default Ember.Component.extend({
   actions: {
     save () {
       this.sendAction('onSave', this.get('value'))
+      set(this, 'isEditing', false)
+    },
+
+    close () {
+      this.sendAction('onClose')
       set(this, 'isEditing', false)
     },
 

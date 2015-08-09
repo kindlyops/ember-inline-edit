@@ -5,7 +5,11 @@ export default Em.Controller.extend({
 
   actions: {
     onSave (val) {
-      console.log(val)
+      console.log('Got save action');
+    },
+
+    onClose (val) {
+      console.log('Got close action');
     }
   }
 })
