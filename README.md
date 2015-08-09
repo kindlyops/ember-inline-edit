@@ -44,10 +44,23 @@ Inside your route, you can handle the `saveModel` action like this:
   }
 ```
 
-By default, when the `value` is empty, it says 'Not provided'. You have the option to customize that. Here's how you can do that:
+The `onSave` action can also be used with the new closure actions. Here's how:
 
 ```handlebars
   {{#ember-inline-edit
+    value=value
+    field='textarea'
+    onSave=(action "changeValue" "attr")}}
+```
+
+This way, it will send two arguments to the `changeValue` action: `attr` that is defined above and the `value`.
+
+There's an `onClose` action that is called when the editor is closed (either by clicking outside or pressing the `esc` key). You can use this to handle cases where, for example, you want to rollback unsaved changes.
+
+By default, name the `value` is empty, it says 'Not provided'. You have the option to customize that. Here's how you can do that:
+
+```handlebars
+  nameember-inline-edit
     value=value
     emptyLabel='It is empty'
     field='textarea'
