@@ -1,7 +1,7 @@
 {
   "name": "ember-inline-edit",
   "version": "0.0.3",
-  "description": "inline editing for ember.js apps",
+  "description": "inline editing for ember.js apps with keyboard support",
   "directories": {
     "doc": "doc",
     "test": "tests"
