@@ -34,7 +34,7 @@ It also exposes an action `onSave` that is called (with the value as an argument
     onSave='changeValue'}}
 ```
 
-Inside your route, you can handle the `saveModel` action like this:
+Inside your route, you can handle the `changeValue` action like this:
 
 ```handlebars
   actions: {
@@ -53,9 +53,19 @@ The `onSave` action can also be used with the new closure actions. Here's how:
     onSave=(action "changeValue" "attr")}}
 ```
 
-This way, it will send two arguments to the `changeValue` action: `attr` that is defined above and the `value`.
+In the example above, it will send two arguments to the `changeValue` action: `attr` that is defined above and the `value`.
 
 There's an `onClose` action that is called when the editor is closed (either by clicking outside or pressing the `esc` key). You can use this to handle cases where, for example, you want to rollback unsaved changes.
+
+Here's how you can use that:
+
+```handlebars
+  {{ember-inline-edit
+    value=value
+    field='textarea'
+    onSave=(action "changeValue" "attr")
+    onClose=(action "rollback" "attr")}}
+```
 
 By default, name the `value` is empty, it says 'Not provided'. You have the option to customize that. Here's how you can do that:
 
@@ -75,7 +85,7 @@ There's no styling provided by default. Feel free to add your own.
 
 Inside the inputs (the textarea, input fields, etc.), if the user hits `enter`, it does exactly what a click on the save button would do (i.e. sends an `onSave` action and closes the editor).
 
-If the user hits `esc`, the editor closes _without_ sending the `onSave` action.
+If the user hits `esc`, the editor closes and sends the `onClose` action.
 
 ## Issues? Bugs?
 
