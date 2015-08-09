@@ -11,7 +11,11 @@
     "build": "ember build",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swastik/ember-inline-edit"
+  },
+  "homepage": "https://github.com/swastik/ember-inline-edit",
   "engines": {
     "node": ">= 0.10.0"
   },
