@@ -38,7 +38,11 @@
     "ember-try": "0.0.6"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "inline editing",
+    "inline editor",
+    "inplace editing",
+    "inplace editor"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.0.0"
