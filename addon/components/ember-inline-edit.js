@@ -25,7 +25,7 @@ export default Ember.Component.extend({
 
   field: 'text',
   value: null,
-  emptyLabel: 'Not Provided',
+  placeholder: 'Not Provided',
 
   valueIsEmpty: computed.empty('value'),
 

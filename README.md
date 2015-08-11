@@ -72,7 +72,7 @@ By default, name the `value` is empty, it says 'Not provided'. You have the opti
 ```handlebars
   {{ember-inline-edit
     value=value
-    emptyLabel='It is empty'
+    placeholder='It is empty'
     field='textarea'
     onSave='changeValue'}}
 ```
