@@ -72,6 +72,11 @@ export default Ember.Component.extend({
     run.next(() => { $('.ember-inline-edit-input').focus() })
   },
 
+  _teardown: on('willDestroyElement', function() {
+    $(document).off('click', this._handleClick)
+    $(this.element).off('keyup', '.ember-inline-edit-input', this._handleKeyup)
+  }),
+
   actions: {
     save () {
       info('[ember-inline-edit] Got the `onSave` action')
