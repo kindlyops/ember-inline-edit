@@ -47,8 +47,9 @@ export default Ember.Component.extend({
     const isInside = editor.is(target) || editor.has(target).length > 0
 
     if (isInside && !isEditing) {
-      set(this, 'isEditing', true)
-      this._focusOnInput()
+      if (get(this, 'showEditButton')) return
+      this.send('startEditing')
+
     } else if (!isInside && isEditing) {
       this.send('close')
     }
@@ -82,6 +83,12 @@ export default Ember.Component.extend({
       info('[ember-inline-edit] Got the `onSave` action')
       this.sendAction('onSave', this.get('value'))
       set(this, 'isEditing', false)
+    },
+
+    startEditing () {
+      info('[ember-inline-edit] Got the `startEditing` action')
+      set(this, 'isEditing', true)
+      this._focusOnInput()
     },
 
     close () {
