@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   classNames: ['ember-inline-edit'],
   classNameBindings: ['isEditing:is-editing'],
 
-  textFields: ['text', 'phone', 'email'],
+  textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],
 
   isEditing: false,
