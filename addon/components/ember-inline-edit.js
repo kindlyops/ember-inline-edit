@@ -1,20 +1,21 @@
 import Ember from 'ember';
+import layout from '../templates/components/ember-inline-edit';
 
 const {
   get: get,
   set: set,
   computed,
   on,
-  getWithDefault,
   run,
   Logger
-} = Em
+} = Ember
 
 const {
   info
 } = Logger
 
 export default Ember.Component.extend({
+  layout,
   classNames: ['ember-inline-edit'],
   classNameBindings: ['isEditing:is-editing'],
 
@@ -26,6 +27,7 @@ export default Ember.Component.extend({
   field: 'text',
   value: null,
   placeholder: 'Not Provided',
+  saveLabel: 'Save',
 
   valueIsEmpty: computed.empty('value'),
 
@@ -36,18 +38,18 @@ export default Ember.Component.extend({
   }),
 
   _setupEventHandlers () {
-    $(document).on('click', this._handleClick)
-    $(this.element).on('keyup', '.ember-inline-edit-input', this._handleKeyup)
+    Ember.$(document).on('click', this._handleClick)
+    Ember.$(this.element).on('keyup', '.ember-inline-edit-input', this._handleKeyup)
   },
 
   _handleClick (e) {
     const isEditing = get(this, 'isEditing')
-    const editor = $(this.element)
-    const target = $(e.target)
+    const editor = Ember.$(this.element)
+    const target = Ember.$(e.target)
     const isInside = editor.is(target) || editor.has(target).length > 0
 
     if (isInside && !isEditing) {
-      if (get(this, 'showEditButton')) return
+      if (get(this, 'showEditButton')) { return }
       this.send('startEditing')
 
     } else if (!isInside && isEditing) {
@@ -60,7 +62,7 @@ export default Ember.Component.extend({
     const isEnter = e.which === 13 || e.keyCode === 13
     const isEsc   = e.which === 27 || e.keyCode === 27
 
-    if (!isEditing) return
+    if (!isEditing) { return }
 
     if (isEnter) {
       this.send('save')
@@ -70,35 +72,35 @@ export default Ember.Component.extend({
   },
 
   _focusOnInput () {
-    run.next(() => { $('.ember-inline-edit-input').focus() })
+    run.next(() => { Ember.$('.ember-inline-edit-input').focus() })
   },
 
   _teardown: on('willDestroyElement', function() {
-    $(document).off('click', this._handleClick)
-    $(this.element).off('keyup', '.ember-inline-edit-input', this._handleKeyup)
+    Ember.$(document).off('click', this._handleClick)
+    Ember.$(this.element).off('keyup', '.ember-inline-edit-input', this._handleKeyup)
   }),
 
   actions: {
     save () {
       info('[ember-inline-edit] Got the `onSave` action')
       this.sendAction('onSave', this.get('value'))
-      set(this, 'isEditing', false)
+      Ember.run(this, function(){ set(this, 'isEditing', false) })
     },
 
     startEditing () {
       info('[ember-inline-edit] Got the `startEditing` action')
-      set(this, 'isEditing', true)
+      Ember.run(this, function(){ set(this, 'isEditing', true) })
       this._focusOnInput()
     },
 
     close () {
       info('[ember-inline-edit] Got the `onClose` action')
       this.sendAction('onClose')
-      set(this, 'isEditing', false)
+      Ember.run(this, function(){ set(this, 'isEditing', false) })
     },
 
     setValue (value) {
-      set(this, 'value', value)
+      Ember.run(this, function(){ set(this, 'value', value) })
     }
   }
 });
