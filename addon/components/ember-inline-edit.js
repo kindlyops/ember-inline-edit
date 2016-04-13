@@ -28,6 +28,7 @@ export default Ember.Component.extend({
   value: null,
   placeholder: 'Not Provided',
   saveLabel: 'Save',
+  fieldWidth: null,
 
   valueIsEmpty: computed.empty('value'),
 
@@ -50,8 +51,9 @@ export default Ember.Component.extend({
 
     if (isInside && !isEditing) {
       if (get(this, 'showEditButton')) { return }
+      let width = Ember.String.htmlSafe('width: ' + (editor.width() + 2) + 'px')
+      Ember.run(this, function(){ this.set('fieldWidth', width)})
       this.send('startEditing')
-
     } else if (!isInside && isEditing) {
       this.send('close')
     }

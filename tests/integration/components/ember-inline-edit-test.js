@@ -67,6 +67,20 @@ test('it renders a non-default button label', function (assert) {
   assert.equal(this.$('.ember-inline-edit-save').text().trim(), "✓")
 })
 
+test('on click, it renders the hint if present', function (assert) {
+  this.render(hbs`{{ember-inline-edit 
+                        value=value 
+                        hintLabel="press Enter to save"
+                        onSave="onSave"
+                        onClose="onClose"}}`);
+                          
+  assert.equal(this.$('.ember-inline-edit .hint').length, 0)
+
+  this.$('.ember-inline-edit').click();
+  
+  assert.equal(this.$('.ember-inline-edit .hint').text().trim(), 'press Enter to save')
+})
+
 test('on save, it sends the save action', function (assert) {
   this.render(hbs`{{ember-inline-edit 
                         value=value 
@@ -111,4 +125,20 @@ test('on pressing esc, it sends the close action', function (assert) {
 
   this.$('.ember-inline-edit-input').trigger('esc')
   assert.equal(this.get('value'), null)
+})
+
+test('the text field is the same width as the original element', function(assert){
+    this.render(hbs`{{ember-inline-edit 
+                        value='A long field value, probably at least a few hundred pixels' 
+                        onSave="onSave"
+                        onClose="onClose"}}`);
+                          
+    assert.equal(this.$('.ember-inline-edit-input').length, 0)
+    
+    let width = this.$('.ember-inline-edit').width();
+
+    this.$('.ember-inline-edit').click()
+    
+    assert.equal(this.$('.ember-inline-edit-input').width(), width + 2)
+
 })
