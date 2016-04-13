@@ -1,7 +1,7 @@
 {
   "name": "ember-inline-edit",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.3",
+  "description": "inline editing for ember.js apps with keyboard support",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,7 +11,10 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakemoves/ember-inline-edit"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -39,7 +42,11 @@
     "loader.js": "^4.0.1"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "inline editing",
+    "inline editor",
+    "inplace editing",
+    "inplace editor"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
