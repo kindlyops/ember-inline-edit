@@ -1,5 +1,5 @@
 {
-  "name": "ember-inline-edit",
+  "name": "prism-inline-edit",
   "version": "0.1.3",
   "description": "inline editing for ember.js apps with keyboard support",
   "directories": {
