@@ -16,7 +16,7 @@
 
   <button {{action "save" bubbles=false}}
           class="ember-inline-edit-save">
-    Save
+    {{saveLabel}}
   </button>
 {{else}}
   {{#if valueIsEmpty}}
