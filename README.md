@@ -79,6 +79,16 @@ By default, name the `value` is empty, it says 'Not provided'. You have the opti
 
 With this, if the `value` is empty, it will show `It is empty` instead.
 
+By default, the save button is labeled 'Save'. You can change that easily:
+
+```handlebars
+  {{ember-inline-edit
+    value=value
+    field='text'
+    saveLabel='✓'
+    onSave='changeValue'}}
+```
+
 There's no styling provided by default. Feel free to add your own.
 
 #### Keyboard Support

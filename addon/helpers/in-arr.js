@@ -1,14 +1,11 @@
 import Ember from 'ember';
 
-const { isEmpty, Logger } = Ember
-const { warn } = Logger
-
-export function inArr(params, hash) {
+export function inArr(params/*, hash*/) {
   const haystack = params[0]
   const needle = params[1]
 
-  if (isEmpty(haystack) || isEmpty(needle)) {
-    warn('in-arr params cannot be empty')
+  if (Ember.isEmpty(haystack) || Ember.isEmpty(needle)) {
+    Ember.warn('in-arr params cannot be empty')
     return
   }
   

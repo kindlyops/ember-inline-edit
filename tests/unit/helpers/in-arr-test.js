@@ -1,4 +1,4 @@
-import { inArr } from '../../../helpers/in-arr';
+import { inArr } from 'dummy/helpers/in-arr';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | in arr');
