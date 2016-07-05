@@ -89,7 +89,8 @@ export default Ember.Component.extend({
       Ember.run(this, function(){ set(this, 'isEditing', false) })
     },
 
-    startEditing () {
+    startEditing (e) {
+      e.stopPropagation()
       info('[ember-inline-edit] Got the `startEditing` action')
       Ember.run(this, function(){ set(this, 'isEditing', true) })
       this._focusOnInput()
