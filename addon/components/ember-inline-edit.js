@@ -53,7 +53,7 @@ export default Ember.Component.extend({
       if (get(this, 'showEditButton')) { return }
       let width = Ember.String.htmlSafe('width: ' + (editor.width() + 2) + 'px')
       Ember.run(this, function(){ this.set('fieldWidth', width)})
-      this.send('startEditing')
+      this.send('startEditing', e)
     } else if (!isInside && isEditing) {
       this.send('close')
     }
