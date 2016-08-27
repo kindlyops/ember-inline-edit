@@ -17,7 +17,7 @@ const {
 export default Ember.Component.extend({
   layout,
   classNames: ['ember-inline-edit'],
-  classNameBindings: ['isEditing:is-editing'],
+  classNameBindings: ['isEditing:is-editing', 'enabled::disabled'],
 
   textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],

@@ -170,3 +170,15 @@ test('it should send the close action if disabled', function (assert) {
   assert.equal(this.$('.ember-inline-edit-save').length, 0)
   assert.equal(this.get('value', 'closed'))
 })
+
+test('it should gain the .disabled class if not enabled', function (assert) {
+  this.set('enabled', true);
+  this.render(hbs`{{ember-inline-edit 
+                    enabled=enabled
+                    value=value}}`);
+
+  assert.equal(this.$('.ember-inline-edit:not(.disabled)').length, 1)
+
+  this.set('enabled', false);
+  assert.equal(this.$('.ember-inline-edit.disabled').length, 1)
+})
