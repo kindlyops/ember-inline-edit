@@ -7,7 +7,7 @@
         oninput={{action "setValue" value="target.value"}} 
         style={{fieldWidth}} />
 
-  {{else if (in-arr textAreaFields field)}}
+  {{else if isMultiline}}
     <textarea
       value={{value}}
       class="ember-inline-edit-input"

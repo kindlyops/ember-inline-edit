@@ -97,7 +97,7 @@ test('on save, it sends the save action', function (assert) {
   assert.equal(this.get('value'), 'Something')
 })
 
-test('on pressing enter, it sends the save action', function (assert) {
+test('on pressing enter in text field, it sends the save action', function (assert) {
   this.render(hbs`{{ember-inline-edit 
                         value=value 
                         onSave="onSave"
@@ -110,6 +110,22 @@ test('on pressing enter, it sends the save action', function (assert) {
   this.$('.ember-inline-edit-input').trigger('enter')
 
   assert.equal(this.get('value'), 'Something')
+})
+
+test('on pressing enter in textarea field, it does not send the save action', function (assert) {
+  this.render(hbs`{{ember-inline-edit 
+                    value=value
+                    field="textarea"
+                    onSave="onSave"
+                    onClose="onClose"}}`);
+
+  this.$('.ember-inline-edit').click()
+
+  this.$('.ember-inline-edit-input').val('Something')
+  this.$('.ember-inline-edit-input').trigger('input')
+  this.$('.ember-inline-edit-input').trigger('enter')
+
+  assert.equal(this.$('.ember-inline-edit-input').length, 1)
 })
 
 test('on pressing esc, it sends the close action', function (assert) {
