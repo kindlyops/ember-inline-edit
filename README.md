@@ -89,6 +89,15 @@ By default, the save button is labeled 'Save'. You can change that easily:
     onSave='changeValue'}}
 ```
 
+Editing can be conditionally prevented with the `enabled` property. When the component becomes disabled, the `onClose` event will be fired.
+
+```handlebars
+  {{ember-inline-edit
+    value=value
+    enabled=session.isAuthenticated
+    onSave='changeValue'}}
+```
+
 There's no styling provided by default. Feel free to add your own.
 
 #### Keyboard Support
