@@ -23,7 +23,7 @@ export default Ember.Component.extend({
   textAreaFields: ['textarea'],
 
   isEditing: false,
-
+  enabled: true,
   field: 'text',
   value: null,
   placeholder: 'Not Provided',
@@ -45,17 +45,20 @@ export default Ember.Component.extend({
 
   _handleClick (e) {
     const isEditing = get(this, 'isEditing')
+    const enabled = get(this, 'enabled')
     const editor = Ember.$(this.element)
     const target = Ember.$(e.target)
     const isInside = editor.is(target) || editor.has(target).length > 0
 
-    if (isInside && !isEditing) {
-      if (get(this, 'showEditButton')) { return }
-      let width = Ember.String.htmlSafe('width: ' + (editor.width() + 2) + 'px')
-      Ember.run(this, function(){ this.set('fieldWidth', width)})
-      this.send('startEditing', e)
-    } else if (!isInside && isEditing) {
-      this.send('close')
+    if(enabled) {
+      if (isInside && !isEditing) {
+        if (get(this, 'showEditButton')) { return }
+        let width = Ember.String.htmlSafe('width: ' + (editor.width() + 2) + 'px')
+        Ember.run(this, function(){ this.set('fieldWidth', width)})
+        this.send('startEditing', e)
+      } else if (!isInside && isEditing) {
+        this.send('close')
+      }
     }
   },
 
@@ -74,12 +77,18 @@ export default Ember.Component.extend({
   },
 
   _focusOnInput () {
-    run.next(() => { Ember.$('.ember-inline-edit-input').focus() })
+    run.next(() => { Ember.$(this.element).find('.ember-inline-edit-input').focus() })
   },
 
   _teardown: on('willDestroyElement', function() {
     Ember.$(document).off('click', this._handleClick)
     Ember.$(this.element).off('keyup', '.ember-inline-edit-input', this._handleKeyup)
+  }),
+
+  _disable: Ember.observer('enabled', function() {
+    if(!this.get('enabled')){
+      this.send('close');
+    }
   }),
 
   actions: {
