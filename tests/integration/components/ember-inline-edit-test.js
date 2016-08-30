@@ -142,3 +142,43 @@ test('the text field is the same width as the original element', function(assert
     assert.equal(this.$('.ember-inline-edit-input').width(), width + 2)
 
 })
+
+test('on click, it does nothing if not enabled', function (assert) {
+  this.render(hbs`{{ember-inline-edit 
+                    enabled=false}}`);
+
+  assert.equal(this.$('.ember-inline-edit-input').length, 0)
+  assert.equal(this.$('.ember-inline-edit-save').length, 0)
+
+  this.$('.ember-inline-edit').click();
+  assert.equal(this.$('.ember-inline-edit-input').length, 0)
+  assert.equal(this.$('.ember-inline-edit-save').length, 0)
+})
+
+test('it should send the close action if disabled', function (assert) {
+  this.set('enabled', true);
+  this.render(hbs`{{ember-inline-edit 
+                    enabled=enabled
+                    value=value}}`);
+
+  this.$('.ember-inline-edit').click();
+  assert.equal(this.$('.ember-inline-edit-input').length, 1)
+  assert.equal(this.$('.ember-inline-edit-save').length, 1)
+
+  this.set('enabled', false);
+  assert.equal(this.$('.ember-inline-edit-input').length, 0)
+  assert.equal(this.$('.ember-inline-edit-save').length, 0)
+  assert.equal(this.get('value', 'closed'))
+})
+
+test('it should gain the .disabled class if not enabled', function (assert) {
+  this.set('enabled', true);
+  this.render(hbs`{{ember-inline-edit 
+                    enabled=enabled
+                    value=value}}`);
+
+  assert.equal(this.$('.ember-inline-edit:not(.disabled)').length, 1)
+
+  this.set('enabled', false);
+  assert.equal(this.$('.ember-inline-edit.disabled').length, 1)
+})

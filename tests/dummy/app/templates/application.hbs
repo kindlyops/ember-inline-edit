@@ -1,2 +1,20 @@
-{{ember-inline-edit
-  showEditButton=true}}
+
+<div>
+  <div>Basic Usage</div>
+  {{ember-inline-edit value=value}}
+</div>
+<br /><br />
+
+<div>
+  <div>Edit Button</div>
+  {{ember-inline-edit value=value showEditButton=true}}
+</div>
+<br /><br />
+
+<div>
+  <div>Enabled/Disabled</div>
+  <button {{action 'enable'}}>{{enabled}}</button>
+  <br /><br />
+  {{ember-inline-edit value=value enabled=enabled}}
+</div>
+<br /><br />
