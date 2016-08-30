@@ -21,6 +21,9 @@ export default Ember.Component.extend({
 
   textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],
+  isMultiline: Ember.computed('field', 'textAreaFields', function(){
+    return this.get('textAreaFields').includes(this.get('field'));
+  }),
 
   isEditing: false,
   enabled: true,
@@ -66,10 +69,11 @@ export default Ember.Component.extend({
     const isEditing = get(this, 'isEditing')
     const isEnter = e.which === 13 || e.keyCode === 13
     const isEsc   = e.which === 27 || e.keyCode === 27
+    const isMultiline = this.get('isMultiline');
 
     if (!isEditing) { return }
 
-    if (isEnter) {
+    if (isEnter && !isMultiline) {
       this.send('save')
     } else if (isEsc) {
       this.send('close')
