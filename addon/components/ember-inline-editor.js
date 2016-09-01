@@ -10,6 +10,7 @@ const {
 
 export default Ember.Component.extend({
   layout,
+  classNameBindings: ['isVisible:is-visible:is-hidden'],
 
   textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],

@@ -46,7 +46,7 @@ test('on click, it shows the input and button', function (assert) {
                         value=value 
                         onSave="onSave"
                         onClose="onClose"}}`);
-                          
+
   assert.equal(this.$('.ember-inline-edit-input').length, 0)
   assert.equal(this.$('.ember-inline-edit-save').length, 0)
 
@@ -201,3 +201,50 @@ test('it should gain the .disabled class if not enabled', function (assert) {
   this.set('enabled', false);
   assert.equal(this.$('.ember-inline-edit.disabled').length, 1)
 })
+
+test('it should render the editable inside block if a block is present', function(assert) {
+  this.render(hbs`{{#ember-inline-edit as |inline-edit|}}
+                    {{#inline-edit.editable}}
+                      Test
+                    {{/inline-edit.editable}}
+                  {{/ember-inline-edit}}`);
+
+  assert.equal(this.$().text().trim(), 'Test')
+
+});
+
+test('it should render the editor inside block if a block is present', function(assert) {
+  this.render(hbs`{{#ember-inline-edit as |inline-edit|}}
+                    {{#inline-edit.editor}}
+                      Test
+                    {{/inline-edit.editor}}
+                  {{/ember-inline-edit}}`);
+
+  const text = this.$().text().trim()
+  assert.ok(/Test/.test(text), "renders the custom component")
+  assert.ok(/Save/.test(text), "renders the save button")
+});
+
+test('it should toggle the custom editor when clicked on the editable', function(assert) {
+  this.render(hbs`{{#ember-inline-edit as |inline-edit|}}
+                    {{#inline-edit.editable}}
+                      <div class="editable">
+                        Editable
+                      </div>
+                    {{/inline-edit.editable}}
+
+                    {{#inline-edit.editor}}
+                      <div class="editor">
+                        Editor
+                      </div>
+                    {{/inline-edit.editor}}
+                  {{/ember-inline-edit}}`);
+
+  assert.ok(this.$('.editor').parent().hasClass("is-hidden"), "editor is hidden by default")
+  assert.ok(this.$('.editable').parent().hasClass("is-visible"), "editable is visible by default")
+
+  $('.editor').trigger('click')
+
+  assert.ok(this.$('.editor').parent().hasClass("is-visible"), "editor is visible after click")
+  assert.ok(this.$('.editable').parent().hasClass("is-hidden"), "editable is hidden after click")
+});

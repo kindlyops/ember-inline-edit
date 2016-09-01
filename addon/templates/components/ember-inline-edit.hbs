@@ -1,4 +1,4 @@
-{{#if hasBlock}}
+{{#if hasBlockParams}}
   {{yield (hash
       editor=(component 'ember-inline-editor'
         isVisible=isEditing
@@ -24,21 +24,21 @@
 {{else}}
   {{#if isEditing}}
     {{ember-inline-editor
-        value=(readonly value)
-        field=field
-        fieldWidth=fieldWidth
-        saveLabel=saveLabel
-        hintLabel=hintLabel
-        on-update=(action (mut value))
-        on-save=(action "save")
-        on-close=(action "close")
-        }}
+      value=(readonly value)
+      field=field
+      fieldWidth=fieldWidth
+      saveLabel=saveLabel
+      hintLabel=hintLabel
+      on-update=(action (mut value))
+      on-save=(action "save")
+      on-close=(action "close")
+    }}
   {{else}}
     {{ember-inline-editable
-        value=(readonly value)
-        placeholder=placeholder
-        showEditButton=showEditButton
-        on-edit=(action "startEditing")
-        }}
+      value=(readonly value)
+      placeholder=placeholder
+      showEditButton=showEditButton
+      on-edit=(action "startEditing")
+      }}
   {{/if}}
 {{/if}}

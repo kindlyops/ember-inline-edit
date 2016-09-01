@@ -9,5 +9,6 @@ const {
 export default Component.extend({
   layout,
 
+  classNameBindings: ['isVisible:is-visible:is-hidden'],
   valueIsEmpty: computed.empty('value')
 });
