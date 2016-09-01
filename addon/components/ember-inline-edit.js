@@ -2,32 +2,29 @@ import Ember from 'ember'
 import layout from '../templates/components/ember-inline-edit'
 
 const {
+  Component,
   get,
   set,
   computed,
   on,
   run,
   Logger,
-  String: { htmlSafe }
+  String: { htmlSafe },
+  $
 } = Ember
 
 const {
   info
 } = Logger
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: ['ember-inline-edit'],
   classNameBindings: ['isEditing:is-editing', 'enabled::disabled'],
 
-  textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
-  textAreaFields: ['textarea'],
-
-  isMultiline: computed('field', 'textAreaFields', function () {
-    return get(this, 'textAreaFields').includes(get(this, 'field'))
-  }),
-
   isEditing: false,
+  isNotEditing: computed.not('isEditing'),
+
   enabled: true,
   field: 'text',
   value: null,
@@ -35,25 +32,21 @@ export default Ember.Component.extend({
   saveLabel: 'Save',
   fieldWidth: null,
 
-  valueIsEmpty: computed.empty('value'),
-
   setup: on('didInsertElement', function () {
     this._handleClick = this._handleClick.bind(this)
-    this._handleKeyup = this._handleKeyup.bind(this)
     this._setupEventHandlers()
   }),
 
   _setupEventHandlers () {
-    Ember.$(document).on('click', this._handleClick)
-    Ember.$(this.element).on('keyup', '.ember-inline-edit-input', this._handleKeyup)
+    $(document).on('click', this._handleClick)
   },
 
   _handleClick (e) {
     const isEditing = get(this, 'isEditing')
     const enabled = get(this, 'enabled')
 
-    const editor = Ember.$(this.element)
-    const target = Ember.$(e.target)
+    const editor = $(this.element)
+    const target = $(e.target)
     const isInside = editor.is(target) || editor.has(target).length > 0
 
     if (!enabled) return
@@ -75,35 +68,18 @@ export default Ember.Component.extend({
     }
   },
 
-  _handleKeyup (e) {
-    const isEditing = get(this, 'isEditing')
-    const isMultiline = get(this, 'isMultiline')
-
-    const isEnter = e.which === 13 || e.keyCode === 13
-    const isEsc = e.which === 27 || e.keyCode === 27
-
-    if (!isEditing) { return }
-
-    if (isEnter && !isMultiline) {
-      this.send('save')
-    } else if (isEsc) {
-      this.send('close')
-    }
-  },
-
   _focusOnInput () {
     run.next(() => {
-      Ember.$(this.element).find('.ember-inline-edit-input').focus()
+      $(this.element).find('.ember-inline-edit-input').focus()
     })
   },
 
   _teardown: on('willDestroyElement', function () {
     Ember.$(document).off('click', this._handleClick)
-    Ember.$(this.element).off('keyup', '.ember-inline-edit-input', this._handleKeyup)
   }),
 
   didReceiveAttrs () {
-    if (!get(this, 'enabled')) {
+    if (get(this, 'enabled') === false) {
       this.send('close')
     }
   },
@@ -138,10 +114,6 @@ export default Ember.Component.extend({
       run(this, () => {
         set(this, 'isEditing', false)
       })
-    },
-
-    setValue (value) {
-      run(this, () => { set(this, 'value', value) })
     }
   }
 })

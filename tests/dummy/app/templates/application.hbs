@@ -1,7 +1,6 @@
-
 <div>
   <div>Basic Usage</div>
-  {{ember-inline-edit value=value}}
+  {{ember-inline-edit value=value field="textarea"}}
 </div>
 <br /><br />
 
@@ -18,3 +17,16 @@
   {{ember-inline-edit value=value enabled=enabled}}
 </div>
 <br /><br />
+
+<div>
+  Block Usage
+  {{#ember-inline-edit value=value as |inline-edit|}}
+    {{#inline-edit.editable}}
+      <h3>ABCD</h3>
+    {{/inline-edit.editable}}
+
+    {{#inline-edit.editor}}
+      <textarea value={{value}}></textarea>
+    {{/inline-edit.editor}}
+  {{/ember-inline-edit}}
+</div>

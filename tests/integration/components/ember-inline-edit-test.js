@@ -15,6 +15,7 @@ moduleForComponent('ember-inline-edit', 'Integration | Component | ember inline 
     })
 
     this.on('onClose', () => {
+      console.log('got close')
       this.set('value', 'closed')
     })
 
@@ -27,7 +28,7 @@ test('it renders', function (assert) {
                         value=value 
                         onSave="onSave"
                         onClose="onClose"}}`);
-                          
+
   assert.equal(this.$('.ember-inline-edit').length, 1)
 })
 
@@ -36,7 +37,7 @@ test('the label is default', function (assert) {
                         value=value 
                         onSave="onSave"
                         onClose="onClose"}}`);
-                          
+
   assert.equal(this.$('.ember-inline-edit').text().trim(), 'Not Provided')
 })
 
@@ -121,9 +122,11 @@ test('on pressing enter in textarea field, it does not send the save action', fu
 
   this.$('.ember-inline-edit').click()
 
-  this.$('.ember-inline-edit-input').val('Something')
-  this.$('.ember-inline-edit-input').trigger('input')
-  this.$('.ember-inline-edit-input').trigger('enter')
+  Em.run(() => {
+    this.$('.ember-inline-edit-input').val('Something')
+    this.$('.ember-inline-edit-input').trigger('input')
+    this.$('.ember-inline-edit-input').trigger('enter')
+  })
 
   assert.equal(this.$('.ember-inline-edit-input').length, 1)
 })
@@ -133,7 +136,7 @@ test('on pressing esc, it sends the close action', function (assert) {
                         value=value 
                         onSave="onSave"
                         onClose="onClose"}}`);
-                          
+
   assert.equal(this.$('.ember-inline-edit-input').length, 0)
 
   this.$('.ember-inline-edit').click()
