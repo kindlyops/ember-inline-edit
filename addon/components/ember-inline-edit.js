@@ -1,13 +1,14 @@
-import Ember from 'ember';
-import layout from '../templates/components/ember-inline-edit';
+import Ember from 'ember'
+import layout from '../templates/components/ember-inline-edit'
 
 const {
-  get: get,
-  set: set,
+  get,
+  set,
   computed,
   on,
   run,
-  Logger
+  Logger,
+  String: { htmlSafe }
 } = Ember
 
 const {
@@ -21,8 +22,9 @@ export default Ember.Component.extend({
 
   textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],
-  isMultiline: Ember.computed('field', 'textAreaFields', function(){
-    return this.get('textAreaFields').includes(this.get('field'));
+
+  isMultiline: computed('field', 'textAreaFields', function () {
+    return get(this, 'textAreaFields').includes(get(this, 'field'))
   }),
 
   isEditing: false,
@@ -49,27 +51,36 @@ export default Ember.Component.extend({
   _handleClick (e) {
     const isEditing = get(this, 'isEditing')
     const enabled = get(this, 'enabled')
+
     const editor = Ember.$(this.element)
     const target = Ember.$(e.target)
     const isInside = editor.is(target) || editor.has(target).length > 0
 
-    if(enabled) {
-      if (isInside && !isEditing) {
-        if (get(this, 'showEditButton')) { return }
-        let width = Ember.String.htmlSafe('width: ' + (editor.width() + 2) + 'px')
-        Ember.run(this, function(){ this.set('fieldWidth', width)})
-        this.send('startEditing', e)
-      } else if (!isInside && isEditing) {
-        this.send('close')
+    if (!enabled) return
+
+    if (isInside && !isEditing) {
+      if (get(this, 'showEditButton')) {
+        return
       }
+
+      let width = htmlSafe('width: ' + (editor.width() + 2) + 'px')
+
+      run(this, () => {
+        set(this, 'fieldWidth', width)
+      })
+
+      this.send('startEditing', e)
+    } else if (!isInside && isEditing) {
+      this.send('close')
     }
   },
 
   _handleKeyup (e) {
     const isEditing = get(this, 'isEditing')
+    const isMultiline = get(this, 'isMultiline')
+
     const isEnter = e.which === 13 || e.keyCode === 13
-    const isEsc   = e.which === 27 || e.keyCode === 27
-    const isMultiline = this.get('isMultiline');
+    const isEsc = e.which === 27 || e.keyCode === 27
 
     if (!isEditing) { return }
 
@@ -81,42 +92,57 @@ export default Ember.Component.extend({
   },
 
   _focusOnInput () {
-    run.next(() => { Ember.$(this.element).find('.ember-inline-edit-input').focus() })
+    run.next(() => {
+      Ember.$(this.element).find('.ember-inline-edit-input').focus()
+    })
   },
 
-  _teardown: on('willDestroyElement', function() {
+  _teardown: on('willDestroyElement', function () {
     Ember.$(document).off('click', this._handleClick)
     Ember.$(this.element).off('keyup', '.ember-inline-edit-input', this._handleKeyup)
   }),
 
-  _disable: Ember.observer('enabled', function() {
-    if(!this.get('enabled')){
-      this.send('close');
+  didReceiveAttrs () {
+    if (!get(this, 'enabled')) {
+      this.send('close')
     }
-  }),
+  },
 
   actions: {
     save () {
       info('[ember-inline-edit] Got the `onSave` action')
+
       this.sendAction('onSave', this.get('value'))
-      Ember.run(this, function(){ set(this, 'isEditing', false) })
+
+      run(this, () => {
+        set(this, 'isEditing', false)
+      })
     },
 
     startEditing (e) {
-      e.stopPropagation()
       info('[ember-inline-edit] Got the `startEditing` action')
-      Ember.run(this, function(){ set(this, 'isEditing', true) })
+
+      e.stopPropagation()
+
+      run(this, () => {
+        set(this, 'isEditing', true)
+      })
+
       this._focusOnInput()
     },
 
     close () {
       info('[ember-inline-edit] Got the `onClose` action')
       this.sendAction('onClose')
-      Ember.run(this, function(){ set(this, 'isEditing', false) })
+
+      run(this, () => {
+        set(this, 'isEditing', false)
+      })
     },
 
     setValue (value) {
-      Ember.run(this, function(){ set(this, 'value', value) })
+      run(this, () => { set(this, 'value', value) })
     }
   }
-});
+})
+
