@@ -98,6 +98,15 @@ Editing can be conditionally prevented with the `enabled` property. When the com
     onSave='changeValue'}}
 ```
 
+By default, the width of the input is computed. If you want to set it on your
+own via css you can disable this feature:
+```handlebars
+  {{ember-inline-edit
+    value=value
+    computeWidth=false
+    onSave='changeValue'}}
+```
+
 There's no styling provided by default. Feel free to add your own.
 
 #### Keyboard Support
