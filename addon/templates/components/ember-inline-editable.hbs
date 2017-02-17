@@ -1,0 +1,17 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#if valueIsEmpty}}
+    <span class="gray-text">
+      {{placeholder}}
+    </span>
+  {{else}}
+    {{value}}
+  {{/if}}
+
+  {{#if showEditButton}}
+    <span onclick={{action attrs.on-edit}} class="ember-inline-edit-toggle-btn">
+      Edit
+    </span>
+  {{/if}}
+{{/if}}

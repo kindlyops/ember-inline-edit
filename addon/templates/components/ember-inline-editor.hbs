@@ -1,0 +1,28 @@
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#if (in-arr textFields field)}}
+    <input
+      type={{field}}
+      value={{value}}
+      class="ember-inline-edit-input"
+      oninput={{action attrs.on-update value="target.value"}} 
+      style={{fieldWidth}} />
+  {{else if (in-arr textAreaFields field)}}
+    <textarea
+      value={{value}}
+      class="ember-inline-edit-input"
+      oninput={{action attrs.on-update value="target.value"}}>
+    </textarea>
+  {{/if}}
+{{/if}}
+
+<button
+  {{action attrs.on-save bubbles=false}}
+  class="ember-inline-edit-save">
+  {{saveLabel}}
+</button>
+
+{{#if hintLabel}}
+  <span class="hint">{{{hintLabel}}}</span>
+{{/if}}
