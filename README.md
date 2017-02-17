@@ -42,7 +42,7 @@ Here's how you can use that:
   {{ember-inline-edit
     value=value
     field='textarea'
-    onSave=(action "changeValue" "attr")
+    onSave=(action (mut someValue))
     onClose=(action "rollback" "attr")}}
 ```
 
@@ -53,7 +53,7 @@ By default, name the `value` is empty, it says 'Not provided'. You have the opti
     value=value
     placeholder='It is empty'
     field='textarea'
-    onSave='changeValue'}}
+    onSave=(action (mut someValue))}}
 ```
 
 With this, if the `value` is empty, it will show `It is empty` instead.
@@ -65,7 +65,7 @@ By default, the save button is labeled 'Save'. You can change that easily:
     value=value
     field='text'
     saveLabel='✓'
-    onSave='changeValue'}}
+    onSave=(action (mut someValue))}}
 ```
 
 Editing can be conditionally prevented with the `enabled` property. When the component becomes disabled, the `onClose` event will be fired.
@@ -74,7 +74,7 @@ Editing can be conditionally prevented with the `enabled` property. When the com
   {{ember-inline-edit
     value=value
     enabled=session.isAuthenticated
-    onSave='changeValue'}}
+    onSave=(action (mut someValue))}}
 ```
 
 There's no styling provided by default. Feel free to add your own.
