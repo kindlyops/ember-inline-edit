@@ -15,3 +15,11 @@ html {
 .gray-text {
   color: #888;
 }
+
+.ember-inline-edit-toggle-btn {
+  font-size: 12px;
+  background: #666;
+  color: white;
+  border-radius: 9999em;
+  padding: 3px 6px
+}

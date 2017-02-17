@@ -5,28 +5,18 @@ const {
   get,
   set,
   computed,
+  Component,
   $
 } = Em
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNameBindings: ['isVisible:is-visible:is-hidden'],
 
   textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],
 
-  didInsertElement () {
-    this._handleKeyup = this._handleKeyup.bind(this)
-    this._element = $(this.element)
-
-    this._element.on('keyup', '.ember-inline-edit-input', this._handleKeyup)
-  },
-
-  willDestroyElement () {
-    this._element.off('keyup', '.ember-inline-edit-input', this._handleKeyup)
-  },
-
-  _handleKeyup (e) {
+  keyUp (e) {
     const field = get(this, 'field')
     const textAreaFields = get(this, 'textAreaFields')
 
