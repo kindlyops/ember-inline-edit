@@ -68,12 +68,6 @@ export default Component.extend({
     }
   },
 
-  _focusOnInput () {
-    run.next(() => {
-      $(this.element).find('.ember-inline-edit-input').focus()
-    })
-  },
-
   _teardown: on('willDestroyElement', function () {
     Ember.$(document).off('click', this._handleClick)
   }),
@@ -103,8 +97,6 @@ export default Component.extend({
       run(this, () => {
         set(this, 'isEditing', true)
       })
-
-      this._focusOnInput()
     },
 
     close () {
