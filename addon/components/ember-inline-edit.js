@@ -5,6 +5,7 @@ const {
   Component,
   get,
   set,
+  getProperties,
   computed,
   on,
   run,
@@ -16,6 +17,10 @@ const {
 const {
   info
 } = Logger
+
+const clickIsInside = (element, target) => {
+  return $(element).is($(target)) || $(element).has($(target)).length > 0
+}
 
 export default Component.extend({
   layout,
@@ -32,45 +37,49 @@ export default Component.extend({
   saveLabel: 'Save',
   fieldWidth: null,
 
-  setup: on('didInsertElement', function () {
+  didInsertElement () {
     this._handleClick = this._handleClick.bind(this)
-    this._setupEventHandlers()
-  }),
 
-  _setupEventHandlers () {
     $(document).on('click', this._handleClick)
   },
 
-  _handleClick (e) {
-    const isEditing = get(this, 'isEditing')
-    const enabled = get(this, 'enabled')
+  willDestroyElement () {
+    $(document).off('click', this._handleClick)
+  },
 
-    const editor = $(this.element)
-    const target = $(e.target)
-    const isInside = editor.is(target) || editor.has(target).length > 0
+  _handleClick (e) {
+    let { isEditing, enabled } = getProperties(this, 'isEditing', 'enabled')
+
+    /*
+     * Don't care if it's not enabled
+    */
 
     if (!enabled) return
 
-    if (isInside && !isEditing) {
-      if (get(this, 'showEditButton')) {
-        return
-      }
+    let clickedInside = clickIsInside(this.element, e.target)
 
-      let width = htmlSafe('width: ' + (editor.width() + 2) + 'px')
+    if (clickedInside && !isEditing) {
+      /*
+       * If there's an edit button, we want clicks on it to
+       * toggle the editor, so we don't do anything here
+      */
 
-      run(this, () => {
-        set(this, 'fieldWidth', width)
-      })
+      if (get(this, 'showEditButton')) return
 
+      this._setFieldWidth()
       this.send('startEditing', e)
-    } else if (!isInside && isEditing) {
+
+    } else if (!clickedInside && isEditing) {
       this.send('close')
     }
   },
 
-  _teardown: on('willDestroyElement', function () {
-    Ember.$(document).off('click', this._handleClick)
-  }),
+  _setFieldWidth () {
+    let editor = $(this.element)
+    let width = htmlSafe(`width: ${(editor.width() + 2)}px`)
+
+    run(this, () => set(this, 'fieldWidth', width))
+  },
 
   didReceiveAttrs () {
     if (get(this, 'enabled') === false) {
