@@ -31,29 +31,8 @@ It also exposes an action `onSave` that is called (with the value as an argument
   {{ember-inline-edit
     value=value
     field='textarea'
-    onSave='changeValue'}}
+    onSave=(action (mut someValue))}}
 ```
-
-Inside your route, you can handle the `changeValue` action like this:
-
-```handlebars
-  actions: {
-    changeValue (val) {
-      this.set('value', value)
-    }
-  }
-```
-
-The `onSave` action can also be used with the new closure actions. Here's how:
-
-```handlebars
-  {{ember-inline-edit
-    value=value
-    field='textarea'
-    onSave=(action "changeValue" "attr")}}
-```
-
-In the example above, it will send two arguments to the `changeValue` action: `attr` that is defined above and the `value`.
 
 There's an `onClose` action that is called when the editor is closed (either by clicking outside or pressing the `esc` key). You can use this to handle cases where, for example, you want to rollback unsaved changes.
 
@@ -100,6 +79,29 @@ Editing can be conditionally prevented with the `enabled` property. When the com
 
 There's no styling provided by default. Feel free to add your own.
 
+## Block Usage
+
+In case you need to go beyond the default textfields and control what shows as the editable (say an header tag) and what shows as the editor (say a custom select component), you can do that too.
+
+Here’s an example:
+
+```
+  {{#ember-inline-edit value=value as |inline-edit|}}
+    {{#inline-edit.editable}}
+      <h3>Edit this</h3>
+    {{/inline-edit.editable}}
+
+    {{#inline-edit.editor field="textarea"}}
+      <select id="some-select" name="some-name">
+        <option value="option-1">Option 1</option>
+        <option value="option-2">Option 2</option>
+      </select>
+    {{/inline-edit.editor}}
+  {{/ember-inline-edit}}
+```
+
+Everything else (the actions, keyboard support, etc.) works just the same.
+
 #### Keyboard Support
 
 Inside the inputs (the textarea, input fields, etc.), if the user hits `enter`, it does exactly what a click on the save button would do (i.e. sends an `onSave` action and closes the editor).
@@ -108,4 +110,4 @@ If the user hits `esc`, the editor closes and sends the `onClose` action.
 
 ## Issues? Bugs?
 
-Please report any issues or bugs you find. Feel free to send in PRs too.
+Please report any issues or bugs you find.
