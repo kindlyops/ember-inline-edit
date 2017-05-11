@@ -28,17 +28,6 @@ module.exports = {
           'ember': 'beta'
         }
       }
-    },
-    {
-      name: 'ember-canary',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#canary'
-        },
-        resolutions: {
-          'ember': 'canary'
-        }
-      }
     }
   ]
 };
