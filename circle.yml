@@ -1,0 +1,13 @@
+machine:
+  node:
+    version: 2.5.0
+
+dependencies:
+  pre:
+    - npm install -g bower
+    - npm install bower
+    - npm install
+    - bower install
+  cache_directories:
+    - "node_modules"
+    - "bower_components"
