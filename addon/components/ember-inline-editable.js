@@ -9,6 +9,7 @@ const {
 export default Component.extend({
   layout,
 
-  classNameBindings: ['isVisible:is-visible:is-hidden'],
+  classNames: ['ember-inline-editable'],
+  classNameBindings: ['isVisible:is-visible:is-hidden', 'showEditButton:is-not-clickable'],
   valueIsEmpty: computed.empty('value')
 });
