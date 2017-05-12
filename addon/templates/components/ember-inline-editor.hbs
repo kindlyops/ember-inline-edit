@@ -17,11 +17,13 @@
   {{/if}}
 {{/if}}
 
+{{#unless (eq saveLabel "hide")}}
 <button
   {{action attrs.on-save bubbles=false}}
   class="ember-inline-edit-save">
   {{saveLabel}}
 </button>
+{{/unless}}
 
 {{#if hintLabel}}
   <span class="hint">{{{hintLabel}}}</span>
