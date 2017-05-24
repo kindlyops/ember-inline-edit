@@ -19,91 +19,144 @@ moduleForComponent('ember-inline-edit', 'Integration | Component | ember inline 
       this.set('value', 'closed')
     })
 
+    this.on('onCancel', () => {
+      console.log('got cancel')
+      this.set('value', 'canceled')
+    })
+
     this.set('value', null)
   }
 })
 
 test('it renders', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         onSave="onSave"
-                        onClose="onClose"}}`);
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
 
   assert.equal(this.$('.ember-inline-edit').length, 1)
 })
 
 test('the label is default', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         onSave="onSave"
-                        onClose="onClose"}}`);
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
 
   assert.equal(this.$('.ember-inline-edit').text().trim(), 'Not Provided')
 })
 
-test('on click, it shows the input and button', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+test('on click, it shows the input and the buttons by default', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         onSave="onSave"
-                        onClose="onClose"}}`);
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
 
   assert.equal(this.$('.ember-inline-edit-input').length, 0)
   assert.equal(this.$('.ember-inline-edit-save').length, 0)
+  assert.equal(this.$('.ember-inline-edit-cancel').length, 0)
 
   this.$('.ember-inline-edit').click();
 
   assert.equal(this.$('.ember-inline-edit-input').length, 1)
   assert.equal(this.$('.ember-inline-edit-save').length, 1)
+  assert.equal(this.$('.ember-inline-edit-cancel').length, 1)
 })
 
-test('it renders a non-default button label', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+test('it does not render the save button', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
+                        showSaveButton=false
+                        onSave="onSave"
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
+  this.$('.ember-inline-edit').click();
+
+  assert.equal(this.$('.ember-inline-edit-save').length, 0)
+})
+
+test('it does not render the cancel button', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
+                        showCancelButton=false
+                        onSave="onSave"
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
+  this.$('.ember-inline-edit').click();
+
+  assert.equal(this.$('.ember-inline-edit-cancel').length, 0)
+})
+
+test('it renders a non-default save button label', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         saveLabel="✓"
                         onSave="onSave"
-                        onClose="onClose"}}`);
-             
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
   this.$('.ember-inline-edit').click();
-               
+
   assert.equal(this.$('.ember-inline-edit-save').text().trim(), "✓")
 })
 
+test('it renders a non-default cancel button label', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
+                        cancelLabel="x"
+                        onSave="onSave"
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
+  this.$('.ember-inline-edit').click();
+
+  assert.equal(this.$('.ember-inline-edit-cancel').text().trim(), "x")
+})
+
 test('on click, it renders the hint if present', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         hintLabel="press Enter to save"
                         onSave="onSave"
-                        onClose="onClose"}}`);
-                          
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
   assert.equal(this.$('.ember-inline-edit .hint').length, 0)
 
   this.$('.ember-inline-edit').click();
-  
+
   assert.equal(this.$('.ember-inline-edit .hint').text().trim(), 'press Enter to save')
 })
 
 test('on save, it sends the save action', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         onSave="onSave"
-                        onClose="onClose"}}`);
-                          
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
   this.$('.ember-inline-edit').click()
-  
+
   this.$('.ember-inline-edit-input').val('Something')
   this.$('.ember-inline-edit-input').trigger('input')
-  
+
   this.$('.ember-inline-edit-save').click()
 
   assert.equal(this.get('value'), 'Something')
 })
 
 test('on pressing enter in text field, it sends the save action', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         onSave="onSave"
-                        onClose="onClose"}}`);
-                          
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
   this.$('.ember-inline-edit').click()
 
   this.$('.ember-inline-edit-input').val('Something')
@@ -114,11 +167,12 @@ test('on pressing enter in text field, it sends the save action', function (asse
 })
 
 test('on pressing enter in textarea field, it does not send the save action', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
+  this.render(hbs`{{ember-inline-edit
                     value=value
                     field="textarea"
                     onSave="onSave"
-                    onClose="onClose"}}`);
+                    onClose="onClose"
+                    onCancel="onCancel"}}`);
 
   this.$('.ember-inline-edit').click()
 
@@ -131,11 +185,35 @@ test('on pressing enter in textarea field, it does not send the save action', fu
   assert.equal(this.$('.ember-inline-edit-input').length, 1)
 })
 
-test('on pressing esc, it sends the close action', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
-                        value=value 
+test('on cancel, it sends the cancel action and restores the input field to initial state', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
                         onSave="onSave"
-                        onClose="onClose"}}`);
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
+  this.$('.ember-inline-edit').click()
+
+  this.$('.ember-inline-edit-input').val('Some initial value')
+  this.$('.ember-inline-edit-input').trigger('input')
+  this.$('.ember-inline-edit-save').click()
+
+  this.$('.ember-inline-edit').click()
+
+  this.$('.ember-inline-edit-input').val('Some new value')
+  this.$('.ember-inline-edit-input').trigger('input')
+  this.$('.ember-inline-edit-cancel').click()
+
+  assert.equal(this.get('value'), 'Some initial value')
+  assert.equal(this.$('.ember-inline-edit').text().trim(), 'Some initial value')
+})
+
+test('on pressing esc, it sends the close action', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
+                        onSave="onSave"
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
 
   assert.equal(this.$('.ember-inline-edit-input').length, 0)
 
@@ -147,23 +225,24 @@ test('on pressing esc, it sends the close action', function (assert) {
 })
 
 test('the text field is the same width as the original element', function(assert){
-    this.render(hbs`{{ember-inline-edit 
-                        value='A long field value, probably at least a few hundred pixels' 
+    this.render(hbs`{{ember-inline-edit
+                        value='A long field value, probably at least a few hundred pixels'
                         onSave="onSave"
-                        onClose="onClose"}}`);
-                          
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
     assert.equal(this.$('.ember-inline-edit-input').length, 0)
-    
+
     let width = this.$('.ember-inline-edit').width();
 
     this.$('.ember-inline-edit').click()
-    
+
     assert.equal(this.$('.ember-inline-edit-input').width(), width + 2)
 
 })
 
 test('on click, it does nothing if not enabled', function (assert) {
-  this.render(hbs`{{ember-inline-edit 
+  this.render(hbs`{{ember-inline-edit
                     enabled=false}}`);
 
   assert.equal(this.$('.ember-inline-edit-input').length, 0)
@@ -176,7 +255,7 @@ test('on click, it does nothing if not enabled', function (assert) {
 
 test('it should send the close action if disabled', function (assert) {
   this.set('enabled', true);
-  this.render(hbs`{{ember-inline-edit 
+  this.render(hbs`{{ember-inline-edit
                     enabled=enabled
                     value=value}}`);
 
@@ -192,7 +271,7 @@ test('it should send the close action if disabled', function (assert) {
 
 test('it should gain the .disabled class if not enabled', function (assert) {
   this.set('enabled', true);
-  this.render(hbs`{{ember-inline-edit 
+  this.render(hbs`{{ember-inline-edit
                     enabled=enabled
                     value=value}}`);
 
