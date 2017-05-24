@@ -5,11 +5,15 @@
         value=(readonly value)
         field=field
         fieldWidth=fieldWidth
+        showSaveButton=showSaveButton
+        showCancelButton=showCancelButton
         saveLabel=saveLabel
+        cancelLabel=cancelLabel
         hintLabel=hintLabel
         on-update=(action (mut value))
         on-save=(action "save")
         on-close=(action "close")
+        on-cancel=(action "cancel")
         )
 
       editable=(component 'ember-inline-editable'
@@ -27,11 +31,15 @@
       value=(readonly value)
       field=field
       fieldWidth=fieldWidth
+      showSaveButton=showSaveButton
+      showCancelButton=showCancelButton
       saveLabel=saveLabel
+      cancelLabel=cancelLabel
       hintLabel=hintLabel
       on-update=(action (mut value))
       on-save=(action "save")
       on-close=(action "close")
+      on-cancel=(action "cancel")
     }}
   {{else}}
     {{ember-inline-editable

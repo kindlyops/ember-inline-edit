@@ -6,7 +6,7 @@
       type={{field}}
       value={{value}}
       class="ember-inline-edit-input"
-      oninput={{action attrs.on-update value="target.value"}} 
+      oninput={{action attrs.on-update value="target.value"}}
       style={{fieldWidth}} />
   {{else if (in-arr textAreaFields field)}}
     <textarea
@@ -17,11 +17,23 @@
   {{/if}}
 {{/if}}
 
-<button
-  {{action attrs.on-save bubbles=false}}
-  class="ember-inline-edit-save">
-  {{saveLabel}}
-</button>
+<div class="ember-inline-button-container">
+  {{#if showSaveButton}}
+    <button
+      {{action attrs.on-save bubbles=false}}
+      class="ember-inline-edit-save">
+      {{saveLabel}}
+    </button>
+  {{/if}}
+
+  {{#if showCancelButton}}
+    <button
+      {{action attrs.on-cancel bubbles=false}}
+      class="ember-inline-edit-cancel">
+      {{cancelLabel}}
+    </button>
+  {{/if}}
+</div>
 
 {{#if hintLabel}}
   <span class="hint">{{{hintLabel}}}</span>

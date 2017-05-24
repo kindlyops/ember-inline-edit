@@ -33,9 +33,13 @@ export default Component.extend({
   enabled: true,
   field: 'text',
   value: null,
+  previousValue: null,
   placeholder: 'Not Provided',
   saveLabel: 'Save',
+  cancelLabel: 'Cancel',
   fieldWidth: null,
+  showSaveButton: true,
+  showCancelButton: true,
 
   didInsertElement () {
     this._handleClick = this._handleClick.bind(this)
@@ -104,6 +108,7 @@ export default Component.extend({
       e.stopPropagation()
 
       run(this, () => {
+        set(this, 'previousValue', this.get('value'))
         set(this, 'isEditing', true)
       })
     },
@@ -113,6 +118,16 @@ export default Component.extend({
       this.sendAction('onClose')
 
       run(this, () => {
+        set(this, 'isEditing', false)
+      })
+    },
+
+    cancel () {
+      info('[ember-inline-edit] Got the `onCancel` action')
+      this.sendAction('onCancel')
+
+      run(this, () => {
+        set(this, 'value', this.get('previousValue'))
         set(this, 'isEditing', false)
       })
     }
