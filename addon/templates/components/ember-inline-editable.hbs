@@ -10,7 +10,7 @@
   {{/if}}
 
   {{#if showEditButton}}
-    <span onclick={{action attrs.on-edit}} class="ember-inline-edit-toggle-btn">
+    <span onclick={{action attrs.on-edit}} class="ember-inline-edit-toggle-btn {{editButtonClass}}">
       Edit
     </span>
   {{/if}}

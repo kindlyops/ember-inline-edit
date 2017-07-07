@@ -40,6 +40,11 @@ export default Component.extend({
   fieldWidth: null,
   showSaveButton: true,
   showCancelButton: true,
+  editorClass: '',
+  buttonContainerClass: '',
+  editButtonClass: '',
+  saveButtonClass: '',
+  cancelButtonClass: '',
 
   didInsertElement () {
     this._handleClick = this._handleClick.bind(this)
@@ -133,4 +138,3 @@ export default Component.extend({
     }
   }
 })
-
