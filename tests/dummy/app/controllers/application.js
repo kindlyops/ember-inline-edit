@@ -1,16 +1,22 @@
-import Em from 'ember'
+import Ember from 'ember'
 
-export default Em.Controller.extend({
+const {
+  Controller,
+  Logger: { log }
+} = Ember
+
+export default Controller.extend({
   value: '',
   enabled: false,
 
   actions: {
     onSave () {
-      console.log('Got save action');
+      log('Got save action');
     },
     onClose () {
-      console.log('Got close action');
+      log('Got close action');
     },
+
     enable(){
       this.toggleProperty('enabled');
     }

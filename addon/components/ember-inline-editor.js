@@ -4,11 +4,9 @@ import layout from '../templates/components/ember-inline-editor';
 const {
   $,
   get,
-  set,
-  computed,
   Component,
   run
-} = Em
+} = Ember
 
 export default Component.extend({
   layout,

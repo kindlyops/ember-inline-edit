@@ -5,23 +5,23 @@
     <input
       type={{field}}
       value={{value}}
-      class="ember-inline-edit-input"
+      class="ember-inline-edit-input {{editorClass}}"
       oninput={{action attrs.on-update value="target.value"}}
       style={{fieldWidth}} />
   {{else if (in-arr textAreaFields field)}}
     <textarea
       value={{value}}
-      class="ember-inline-edit-input"
+      class="ember-inline-edit-input {{editorClass}}"
       oninput={{action attrs.on-update value="target.value"}}>
     </textarea>
   {{/if}}
 {{/if}}
 
-<div class="ember-inline-button-container">
+<div class="ember-inline-button-container {{buttonContainerClass}}">
   {{#if showSaveButton}}
     <button
       {{action attrs.on-save bubbles=false}}
-      class="ember-inline-edit-save">
+      class="ember-inline-edit-save {{saveButtonClass}}">
       {{saveLabel}}
     </button>
   {{/if}}
@@ -29,7 +29,7 @@
   {{#if showCancelButton}}
     <button
       {{action attrs.on-cancel bubbles=false}}
-      class="ember-inline-edit-cancel">
+      class="ember-inline-edit-cancel {{cancelButtonClass}}">
       {{cancelLabel}}
     </button>
   {{/if}}

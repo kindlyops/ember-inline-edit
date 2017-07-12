@@ -1,13 +1,9 @@
 machine:
   node:
-    version: 4.6.2
+    version: 6.9.0
 
 dependencies:
   pre:
-    - npm install -g bower
-    - npm install bower
     - npm install
-    - bower install
   cache_directories:
     - "node_modules"
-    - "bower_components"
