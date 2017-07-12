@@ -6,5 +6,5 @@ moduleForComponent('ember-inline-editor', 'Integration | Component | ember inlin
 });
 
 test('it renders', function(assert) {
-  expect(0)
+  assert.expect(0)
 });
