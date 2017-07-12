@@ -7,7 +7,6 @@ const {
   set,
   getProperties,
   computed,
-  on,
   run,
   Logger,
   String: { htmlSafe },

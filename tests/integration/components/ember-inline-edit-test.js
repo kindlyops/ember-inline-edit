@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -5,6 +6,8 @@ import hbs from 'htmlbars-inline-precompile';
 // const up    = $.Event('keyup', { keyCode: 38, which: 38})
 // const enter = $.Event('keyup', { keyCode: 13, which: 13})
 // const esc   = $.Event('keyup', { keyCode: 27, which: 27})
+
+const { $, run } = Ember
 
 moduleForComponent('ember-inline-edit', 'Integration | Component | ember inline edit', {
   integration: true,
@@ -15,12 +18,10 @@ moduleForComponent('ember-inline-edit', 'Integration | Component | ember inline 
     })
 
     this.on('onClose', () => {
-      console.log('got close')
       this.set('value', 'closed')
     })
 
     this.on('onCancel', () => {
-      console.log('got cancel')
       this.set('value', 'canceled')
     })
 
@@ -176,7 +177,7 @@ test('on pressing enter in textarea field, it does not send the save action', fu
 
   this.$('.ember-inline-edit').click()
 
-  Em.run(() => {
+  run(() => {
     this.$('.ember-inline-edit-input').val('Something')
     this.$('.ember-inline-edit-input').trigger('input')
     this.$('.ember-inline-edit-input').trigger('enter')

@@ -4,7 +4,7 @@ import layout from '../templates/components/ember-inline-editable';
 const {
   computed,
   Component
-} = Em
+} = Ember
 
 export default Component.extend({
   layout,
