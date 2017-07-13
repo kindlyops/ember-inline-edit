@@ -1,7 +1,7 @@
 [![Ember Observer Score](https://emberobserver.com/badges/ember-inline-edit.svg)](https://emberobserver.com/addons/ember-inline-edit)
 [![CircleCI](https://circleci.com/gh/swastik/ember-inline-edit.svg?style=svg)](https://circleci.com/gh/swastik/ember-inline-edit)
 
-# ✏️ ember-inline-edit
+# ember-inline-edit
 
 ember-inline-edit provides inline editing for your ember apps. Has basic keyboard support, too.
 
