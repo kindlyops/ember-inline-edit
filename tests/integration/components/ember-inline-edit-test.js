@@ -67,6 +67,17 @@ test('on click, it shows the input and the buttons by default', function (assert
   assert.equal(this.$('.ember-inline-edit-cancel').length, 1)
 })
 
+test('on click, the input gets focus', function (assert) {
+  this.render(hbs`{{ember-inline-edit
+                        value=value
+                        onSave="onSave"
+                        onClose="onClose"
+                        onCancel="onCancel"}}`);
+
+  this.$('.ember-inline-edit').click();
+  assert.ok(document.activeElement.classList.contains('ember-inline-edit-input'))
+})
+
 test('it does not render the save button', function (assert) {
   this.render(hbs`{{ember-inline-edit
                         value=value
