@@ -13,9 +13,10 @@ pre {
   float: left;
   width: 100%;
   background-color: white;
-  border: 1px solid #eee;
   border-radius: 5px;
   margin-bottom: 10px;
+  border: 1px solid #f1efef;
+  box-shadow: 0 0 15px 2px #f9f6f6;
 }
 
 .code-card-header,
@@ -23,37 +24,75 @@ pre {
   float: left;
   width: 100%;
   padding: 3px 10px;
-  border-bottom: 1px solid #eee;
-  background-color: #f8f8f8;
+  border-bottom: 1px solid #f1efef;
+}
+
+.code-card-header > h6,
+.example-card-header > h6 {
+  color: black;
 }
 
 .code-card-body {
   float: left;
   width: 100%;
   padding: 10px;
+  background: #fffdfd;
 }
 
 .hljs {
-  background: white;
+  background: #fffdfd;
   padding: 0;
 }
 
-.nav-links {
-  padding: 2rem;
-  text-align: right
+.container {
+  display: flex;
+  height: 100vh;
+  letter-spacing: -.15px;
+  -webkit-font-smoothing: antialiased;
 }
 
-.nav-links a {
+aside {
+  flex: 1;
+  height: 100%;
+  background-color: #e1563f;
+  border-right: thin solid #e1563f;
+}
+
+nav {
+  text-align: right;
+}
+
+nav a {
+  position: relative;
   display: block;
   padding: 1em;
-  color: #777;
+  color: #fbd0c9;
   text-decoration: none;
   text-decoration-skip: ink
 }
 
-.nav-links a.active,
-.nav-links a:hover {
-  font-weight: 500;
-  color: navy;
+nav a.active,
+nav a:hover {
+  font-weight: 600;
+  color: white;
   text-decoration: underline
+}
+
+nav a.active:after {
+  position: absolute;
+  content: '';
+  right: -10px;
+  top: 17.5px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid white;
+}
+
+.content {
+  flex: 3;
+  height: 100%;
+  overflow: scroll;
+  padding-left: 2em
 }
