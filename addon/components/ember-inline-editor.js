@@ -2,11 +2,17 @@ import Component from '@ember/component'
 import { get } from '@ember/object'
 import { scheduleOnce } from '@ember/runloop'
 
-import layout from '../templates/components/ember-inline-editor';
+import layout from '../templates/components/ember-inline-editor'
 
-const {
-  $
-} = Ember
+const isInputField = (el) => {
+  const { tagName } = el
+
+  if (!tagName) {
+    return false
+  }
+
+  return ['input', 'textarea', 'select'].includes(tagName.toLowerCase())
+}
 
 export default Component.extend({
   layout,
@@ -15,25 +21,28 @@ export default Component.extend({
   textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],
 
-  didReceiveAttrs () {
-    scheduleOnce('afterRender', () => {
-      $(this.element).children().first().focus()
+  didReceiveAttrs() {
+    scheduleOnce('afterRender', this.focusOnInput.bind(this))
+  },
+
+  focusOnInput() {
+    const children = this.element.childNodes
+
+    children.forEach(child => {
+      if (isInputField(child)) child.focus()
     })
   },
 
-  keyUp (e) {
-    let field = get(this, 'field')
-    let textAreaFields = get(this, 'textAreaFields')
+  keyUp(ev) {
+    const field = get(this, 'field')
+    const textAreaFields = get(this, 'textAreaFields')
 
-    let isEnter = e.which === 13 || e.keyCode === 13
-    let isEsc   = e.which === 27 || e.keyCode === 27
+    const { keyCode } = ev
 
-    /*
-     * If the user pressed enter and it's not a textarea
-     * field, we send the save action
-    */
+    const isEnter = keyCode === 13
+    const isEsc = keyCode === 27
 
-    if (isEnter && textAreaFields.indexOf(field) < 0) {
+    if (isEnter && !textAreaFields.includes(field)) {
       this.sendAction('on-save')
 
     } else if (isEsc) {
