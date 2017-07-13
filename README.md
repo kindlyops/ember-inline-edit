@@ -15,10 +15,12 @@ Use the `ember-inline-edit` component and provide it a default value.
 
 ```handlebars
   {{ember-inline-edit
-    value=value}}
+    value=(readonly value)
+    onSave=(action (mut value))
+  }}
 ```
 
-To learn more, [please check out our documentation](http://swastik.github.io/ember-inline-edit/).
+This will give you a component that can be edited inline. To learn more, [please check out our documentation](http://swastik.github.io/ember-inline-edit/).
 
 #### Keyboard Support
 
