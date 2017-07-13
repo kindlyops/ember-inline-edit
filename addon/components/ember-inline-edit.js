@@ -1,112 +1,105 @@
-import Component from '@ember/component'
-import { get, set, computed } from '@ember/object'
-import { htmlSafe } from '@ember/string'
-import { run } from '@ember/runloop'
+import Component from "@ember/component"
+import { get, set, computed } from "@ember/object"
+import { htmlSafe } from "@ember/string"
+import { run } from "@ember/runloop"
 
-import layout from '../templates/components/ember-inline-edit'
+import layout from "../templates/components/ember-inline-edit"
 
 export default Component.extend({
   layout,
-  classNames: ['ember-inline-edit'],
-  classNameBindings: ['isEditing:is-editing', 'enabled::disabled'],
+  classNames: ["ember-inline-edit"],
+  classNameBindings: ["isEditing:is-editing", "enabled::disabled"],
 
   isEditing: false,
-  isNotEditing: computed.not('isEditing'),
+  isNotEditing: computed.not("isEditing"),
 
   enabled: true,
-  field: 'text',
+  field: "text",
+
   value: null,
   previousValue: null,
-  placeholder: 'Not Provided',
-  saveLabel: 'Save',
-  cancelLabel: 'Cancel',
+
+  placeholder: "Not Provided",
+  saveLabel: "Save",
+  cancelLabel: "Cancel",
+
   fieldWidth: null,
+
   showSaveButton: true,
   showCancelButton: true,
-  editorClass: '',
-  buttonContainerClass: '',
-  editButtonClass: '',
-  saveButtonClass: '',
-  cancelButtonClass: '',
 
-  didInsertElement () {
-    this._handleClick = this._handleClick.bind(this)
-    document.addEventListener('click', this._handleClick)
+  editorClass: "",
+  buttonContainerClass: "",
+  editButtonClass: "",
+  saveButtonClass: "",
+  cancelButtonClass: "",
+
+  didInsertElement() {
+    this._handleClicks = this._handleClicks.bind(this)
+    document.addEventListener("click", this._handleClicks)
   },
 
-  willDestroyElement () {
-    document.removeEventListener('click', this._handleClick)
+  willDestroyElement() {
+    document.removeEventListener("click", this._handleClicks)
   },
 
-  _handleClick (e) {
-    let enabled = get(this, 'enabled')
+  _handleClicks(ev) {
+    let enabled = get(this, "enabled")
     if (!enabled) return
 
-    let isEditing = get(this, 'isEditing')
-    let clickedInside = this.element.contains(e.target)
+    let isEditing = get(this, "isEditing")
+    let clickedInside = this.element.contains(ev.target)
 
     if (clickedInside && !isEditing) {
-      /*
-       * If there's an edit button, we want clicks on it to
-       * toggle the editor, so we don't do anything here
-      */
-
-      if (get(this, 'showEditButton')) return
+      if (get(this, "showEditButton")) {
+        return
+      }
 
       this._setFieldWidth()
-      this.send('startEditing', e)
-
+      this.send("startEditing", ev)
     } else if (!clickedInside && isEditing) {
-      this.send('close')
+      this.send("cancel")
     }
   },
 
-  _setFieldWidth () {
+  _setFieldWidth() {
     const { width } = this.element.getBoundingClientRect()
 
     run(this, () => {
-      set(this, 'fieldWidth', htmlSafe(`width: ${(width + 2)}px`))
+      set(this, "fieldWidth", htmlSafe(`width: ${width + 2}px`))
     })
   },
 
-  didReceiveAttrs () {
-    if (get(this, 'enabled') === false) {
-      this.send('close')
+  didReceiveAttrs() {
+    if (get(this, "enabled") === false) {
+      this.send("cancel")
     }
   },
 
   actions: {
-    save () {
-      this.sendAction('onSave', this.get('value'))
+    save() {
+      this.sendAction("onSave", this.get("value"))
 
       run(this, () => {
-        set(this, 'isEditing', false)
+        set(this, "isEditing", false)
       })
     },
 
-    startEditing (e) {
+    startEditing(e) {
       e.stopPropagation()
 
       run(this, () => {
-        set(this, 'previousValue', this.get('value'))
-        set(this, 'isEditing', true)
+        set(this, "previousValue", this.get("value"))
+        set(this, "isEditing", true)
       })
     },
 
-    close () {
-      this.sendAction('onClose')
+    cancel() {
+      this.sendAction("onCancel")
 
       run(this, () => {
-        set(this, 'isEditing', false)
-      })
-    },
-
-    cancel () {
-      this.sendAction('onCancel')
-
-      run(this, () => {
-        set(this, 'value', this.get('previousValue'))
-        set(this, 'isEditing', false)
+        set(this, "value", this.get("previousValue"))
+        set(this, "isEditing", false)
       })
     }
   }

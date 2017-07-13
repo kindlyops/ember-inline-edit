@@ -1,28 +1,28 @@
-import Component from '@ember/component'
-import { get } from '@ember/object'
-import { scheduleOnce } from '@ember/runloop'
+import Component from "@ember/component"
+import { get } from "@ember/object"
+import { scheduleOnce } from "@ember/runloop"
 
-import layout from '../templates/components/ember-inline-editor'
+import layout from "../templates/components/ember-inline-editor"
 
-const isInputField = (el) => {
+const isInputField = el => {
   const { tagName } = el
 
   if (!tagName) {
     return false
   }
 
-  return ['input', 'textarea', 'select'].includes(tagName.toLowerCase())
+  return ["input", "textarea", "select"].includes(tagName.toLowerCase())
 }
 
 export default Component.extend({
   layout,
-  classNameBindings: ['isVisible:is-visible:is-hidden'],
+  classNameBindings: ["isVisible:is-visible:is-hidden"],
 
-  textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
-  textAreaFields: ['textarea'],
+  textFields: ["search", "url", "text", "phone", "email", "number"],
+  textAreaFields: ["textarea"],
 
   didReceiveAttrs() {
-    scheduleOnce('afterRender', this.focusOnInput.bind(this))
+    scheduleOnce("afterRender", this.focusOnInput.bind(this))
   },
 
   focusOnInput() {
@@ -34,8 +34,8 @@ export default Component.extend({
   },
 
   keyUp(ev) {
-    const field = get(this, 'field')
-    const textAreaFields = get(this, 'textAreaFields')
+    const field = get(this, "field")
+    const textAreaFields = get(this, "textAreaFields")
 
     const { keyCode } = ev
 
@@ -43,10 +43,9 @@ export default Component.extend({
     const isEsc = keyCode === 27
 
     if (isEnter && !textAreaFields.includes(field)) {
-      this.sendAction('on-save')
-
+      this.sendAction("on-save")
     } else if (isEsc) {
-      this.sendAction('on-close')
+      this.sendAction("on-cancel")
     }
-  },
-});
+  }
+})
