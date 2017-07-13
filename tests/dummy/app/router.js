@@ -7,6 +7,10 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('handling-actions')
+  this.route('changing-input-type')
+  this.route('advanced-usage')
+  this.route('appearance')
 });
 
 export default Router;

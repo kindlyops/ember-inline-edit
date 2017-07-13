@@ -1,0 +1,15 @@
+{{#ember-inline-edit value=value as |x onSave onCancel|}}
+  {{#x.editable}}
+    <h3>{{value}}</h3>
+  {{/x.editable}}
+
+  {{#x.editor}}
+    <select
+      onchange={{action (mut value) value="target.value"}}
+      id="some-select"
+      name="some-name">
+      <option value="option-1">Option 1</option>
+      <option value="option-2">Option 2</option>
+    </select>
+  {{/x.editor}}
+{{/ember-inline-edit}}

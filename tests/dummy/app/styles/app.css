@@ -1,26 +1,59 @@
-html {
-  font-size: 62.5%
+.bg-near-white {
+  background-color: #f8f8f8
 }
 
-.ember-application {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.4rem;
+.code,
+code,
+pre {
+  font-family: Fira Code, Inconsolata, monospace;
 }
 
-.ember-inline-edit-input {
-  font-size: 15px;
-  padding: .5em 1em;
+.code-card,
+.example-card {
+  float: left;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-.gray-text {
-  color: #888;
+.code-card-header,
+.example-card-header {
+  float: left;
+  width: 100%;
+  padding: 3px 10px;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f8f8;
 }
 
-.ember-inline-edit-toggle-btn {
-  font-size: 12px;
-  background: #666;
-  color: white;
-  border-radius: 9999em;
-  border: none;
-  padding: 3px 6px
+.code-card-body {
+  float: left;
+  width: 100%;
+  padding: 10px;
+}
+
+.hljs {
+  background: white;
+  padding: 0;
+}
+
+.nav-links {
+  padding: 2rem;
+  text-align: right
+}
+
+.nav-links a {
+  display: block;
+  padding: 1em;
+  color: #777;
+  text-decoration: none;
+  text-decoration-skip: ink
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  font-weight: 500;
+  color: navy;
+  text-decoration: underline
 }

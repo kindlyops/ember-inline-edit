@@ -1,34 +1,38 @@
-<div>
-  <div>Basic Usage</div>
-  {{ember-inline-edit value=value field="textarea"}}
-</div>
-<br /><br />
+<div class="fl w-100 sans-serif">
+  <div class="fl w-30 pa-2">
+    <div class="fl w-100 mt6 nav-links">
+      {{#link-to "index"}}
+        Basic Usage
+      {{/link-to}}
 
-<div>
-  <div>Edit Button</div>
-  {{ember-inline-edit value=value showEditButton=true}}
-</div>
-<br /><br />
+      {{#link-to "handling-actions"}}
+        Handling Actions
+      {{/link-to}}
 
-<div>
-  <div>Enabled/Disabled</div>
-  <button {{action 'enable'}}>{{enabled}}</button>
-  <br /><br />
-  {{ember-inline-edit value=value enabled=enabled}}
-</div>
-<br /><br />
+      {{#link-to "changing-input-type"}}
+        Changing Field
+      {{/link-to}}
 
-<div>
-  Block Usage
-  {{#ember-inline-edit value=value as |inline-edit|}}
-    {{#inline-edit.editable}}
-      <h3>ABCD</h3>
-    {{/inline-edit.editable}}
+      {{#link-to "advanced-usage"}}
+        Block Usage
+      {{/link-to}}
 
-    {{#inline-edit.editor field="textarea"}}
-      <select id="" name="">
-        <option value=""></option>
-      </select>
-    {{/inline-edit.editor}}
-  {{/ember-inline-edit}}
+      {{#link-to "appearance"}}
+        Customization
+      {{/link-to}}
+    </div>
+  </div>
+
+  <div class="fl w-50 pa-2">
+    <div class="lh-copy">
+      <h1>ember-inline-edit</h1>
+
+      <div class="p gray f4">
+        ember-inline-edit is a simple component that provides inline editing for your ember.js
+        apps. It also has basic keyboard support.
+      </div>
+
+      {{outlet}}
+    </div>
+  </div>
 </div>

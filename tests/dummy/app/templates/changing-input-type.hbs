@@ -1,0 +1,36 @@
+<div class="introduction f5">
+  <h6 class="ttu tracked">Changing Input Type</h6>
+
+  <p>So far, we have dealt with a simple text input. What about other forms of input?</p>
+
+  <p>We can handle (mostly) everything. Here's a list of supported field types:</p>
+
+  <ul>
+    <li>text</li>
+    <li>search</li>
+    <li>url</li>
+    <li>phone</li>
+    <li>email</li>
+    <li>number</li>
+    <li>textarea</li>
+  </ul>
+
+  For example, if you want to make the editor a textarea, just pass in <code>textarea</code>
+  to the <code>field</code> property.
+
+  {{#x-card class="mt2" type="Code"}}
+    {{code-snippet class="code f6" name="changing-input-type.hbs"}}
+  {{/x-card}}
+
+  <p>
+    Here's what that will do.
+  </p>
+
+  {{#x-card type="Example"}}
+    {{ember-inline-edit
+      class="fl w-50"
+      field='textarea'
+      onSave=(action 'onSave' target=applicationController)
+      value=(readonly value)}}
+  {{/x-card}}
+</div>

@@ -1,0 +1,24 @@
+<div class="introduction f5">
+  <h6 class="ttu tracked">Basic Usage</h6>
+
+  <p>Here's the basic way of using this:</p>
+
+  {{#x-card type="Code"}}
+    {{code-snippet class="code f6" name="basic-usage.hbs"}}
+  {{/x-card}}
+
+  <p>
+    This will render a <code>div</code> with the value and make it editable.
+  </p>
+
+  <p>Here's an example:</p>
+
+  {{#x-card type="Example"}}
+    {{ember-inline-edit
+      class="fl w-50"
+      onSave=(action 'onSave' target=applicationController)
+      value=(readonly value)}}
+  {{/x-card}}
+
+  <p>You can click on the value above, change it, save it, or close it by pressing the esc key.</p>
+</div>

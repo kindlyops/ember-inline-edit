@@ -6,13 +6,15 @@ const {
 } = Ember
 
 export default Controller.extend({
-  value: '',
+  value: 'Default Value',
   enabled: false,
 
   actions: {
-    onSave () {
+    onSave (value) {
       log('Got save action');
+      this.set('value', value)
     },
+
     onClose () {
       log('Got close action');
     },
