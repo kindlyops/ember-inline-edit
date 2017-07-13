@@ -14,10 +14,6 @@ moduleForComponent(
         this.set("value", val)
       })
 
-      this.on("onClose", () => {
-        this.set("value", "closed")
-      })
-
       this.on("onCancel", () => {
         this.set("value", "canceled")
       })
@@ -39,7 +35,6 @@ test("it renders", function(assert) {
   this.render(hbs`{{ember-inline-edit
                         value=value
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   assert.ok(find(classNames.container))
@@ -49,7 +44,6 @@ test("the label is default", function(assert) {
   this.render(hbs`{{ember-inline-edit
                         value=value
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   assert.equal(find(classNames.container).innerText.trim(), "Not Provided")
@@ -59,7 +53,6 @@ test("on click, it shows the input and buttons", async function(assert) {
   this.render(hbs`{{ember-inline-edit
                         value=value
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   assert.notOk(find(classNames.input))
@@ -77,7 +70,6 @@ test("on click, the input gets focus", async function(assert) {
   this.render(hbs`{{ember-inline-edit
                         value=value
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -92,7 +84,6 @@ test("it does not render the save button", async function(assert) {
                         value=value
                         showSaveButton=false
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -104,7 +95,6 @@ test("it does not render the cancel button", async function(assert) {
                         value=value
                         showCancelButton=false
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -116,7 +106,6 @@ test("it renders a non-default save button label", async function(assert) {
                         value=value
                         saveLabel="✓"
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -128,7 +117,6 @@ test("it renders a non-default cancel button label", async function(assert) {
                         value=value
                         cancelLabel="x"
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -140,7 +128,6 @@ test("on click, it renders the hint if present", async function(assert) {
                         value=value
                         hintLabel="press Enter to save"
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   assert.notOk(find(classNames.hint))
@@ -154,7 +141,6 @@ test("on save, it sends the save action", async function(assert) {
   this.render(hbs`{{ember-inline-edit
                         value=value
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -170,7 +156,6 @@ test("on pressing enter in text field, it sends the save action", async function
   this.render(hbs`{{ember-inline-edit
                         value=(readonly value)
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -188,7 +173,6 @@ test("on pressing enter in textarea field, it does not send the save action", as
                     value=value
                     field="textarea"
                     onSave="onSave"
-                    onClose="onClose"
                     onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -204,7 +188,6 @@ test("on cancel, it sends the cancel action and restores the input field to init
   this.render(hbs`{{ember-inline-edit
                         value=value
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   await click(classNames.container)
@@ -222,7 +205,6 @@ test("on pressing esc, it sends the close action", async function(assert) {
   this.render(hbs`{{ember-inline-edit
                         value=value
                         onSave="onSave"
-                        onClose="onClose"
                         onCancel="onCancel"}}`)
 
   assert.notOk(find(classNames.input))
@@ -242,7 +224,6 @@ test("the text field is the same width as the original element", async function(
   this.render(hbs`{{ember-inline-edit
                       value='A long field value, probably at least a few hundred pixels'
                       onSave="onSave"
-                      onClose="onClose"
                       onCancel="onCancel"}}`)
 
   assert.notOk(find(classNames.input))

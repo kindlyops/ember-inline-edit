@@ -15,7 +15,7 @@ export default Controller.extend({
       this.set('value', value)
     },
 
-    onClose () {
+    onCancel () {
       log('Got close action');
     },
 
