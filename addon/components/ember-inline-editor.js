@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component'
+import { get } from '@ember/object'
+import { scheduleOnce } from '@ember/runloop'
+
 import layout from '../templates/components/ember-inline-editor';
 
 const {
-  $,
-  get,
-  Component,
-  run
+  $
 } = Ember
 
 export default Component.extend({
@@ -16,7 +16,7 @@ export default Component.extend({
   textAreaFields: ['textarea'],
 
   didReceiveAttrs () {
-    run.scheduleOnce('afterRender', () => {
+    scheduleOnce('afterRender', () => {
       $(this.element).children().first().focus()
     })
   },

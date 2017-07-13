@@ -1,21 +1,13 @@
-import Ember from 'ember'
+import Component from '@ember/component'
+import { get, set, computed } from '@ember/object'
+import { htmlSafe } from '@ember/string'
+import { run } from '@ember/runloop'
+
 import layout from '../templates/components/ember-inline-edit'
 
 const {
-  Component,
-  get,
-  set,
-  getProperties,
-  computed,
-  run,
-  Logger,
-  String: { htmlSafe },
   $
 } = Ember
-
-const {
-  info
-} = Logger
 
 const clickIsInside = (element, target) => {
   return $(element).is($(target)) || $(element).has($(target)).length > 0
@@ -56,14 +48,10 @@ export default Component.extend({
   },
 
   _handleClick (e) {
-    let { isEditing, enabled } = getProperties(this, 'isEditing', 'enabled')
-
-    /*
-     * Don't care if it's not enabled
-    */
-
+    let enabled = get(this, 'enabled')
     if (!enabled) return
 
+    let isEditing = get(this, 'isEditing')
     let clickedInside = clickIsInside(this.element, e.target)
 
     if (clickedInside && !isEditing) {
@@ -97,8 +85,6 @@ export default Component.extend({
 
   actions: {
     save () {
-      info('[ember-inline-edit] Got the `onSave` action')
-
       this.sendAction('onSave', this.get('value'))
 
       run(this, () => {
@@ -107,8 +93,6 @@ export default Component.extend({
     },
 
     startEditing (e) {
-      info('[ember-inline-edit] Got the `startEditing` action')
-
       e.stopPropagation()
 
       run(this, () => {
@@ -118,7 +102,6 @@ export default Component.extend({
     },
 
     close () {
-      info('[ember-inline-edit] Got the `onClose` action')
       this.sendAction('onClose')
 
       run(this, () => {
@@ -127,7 +110,6 @@ export default Component.extend({
     },
 
     cancel () {
-      info('[ember-inline-edit] Got the `onCancel` action')
       this.sendAction('onCancel')
 
       run(this, () => {

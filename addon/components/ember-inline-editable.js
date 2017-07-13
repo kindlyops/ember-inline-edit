@@ -1,10 +1,7 @@
-import Ember from 'ember';
-import layout from '../templates/components/ember-inline-editable';
+import Component from '@ember/component'
+import { computed } from '@ember/object'
 
-const {
-  computed,
-  Component
-} = Ember
+import layout from '../templates/components/ember-inline-editable';
 
 export default Component.extend({
   layout,
