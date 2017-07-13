@@ -18,7 +18,7 @@ Use the `ember-inline-edit` component and provide it a default value.
     value=value}}
 ```
 
-To learn more, please check out our documentation.
+To learn more, [please check out our documentation](http://swastik.github.io/ember-inline-edit/).
 
 #### Keyboard Support
 
