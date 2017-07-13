@@ -5,14 +5,6 @@ import { run } from '@ember/runloop'
 
 import layout from '../templates/components/ember-inline-edit'
 
-const {
-  $
-} = Ember
-
-const clickIsInside = (element, target) => {
-  return $(element).is($(target)) || $(element).has($(target)).length > 0
-}
-
 export default Component.extend({
   layout,
   classNames: ['ember-inline-edit'],
@@ -39,12 +31,11 @@ export default Component.extend({
 
   didInsertElement () {
     this._handleClick = this._handleClick.bind(this)
-
-    $(document).on('click', this._handleClick)
+    document.addEventListener('click', this._handleClick)
   },
 
   willDestroyElement () {
-    $(document).off('click', this._handleClick)
+    document.removeEventListener('click', this._handleClick)
   },
 
   _handleClick (e) {
@@ -52,7 +43,7 @@ export default Component.extend({
     if (!enabled) return
 
     let isEditing = get(this, 'isEditing')
-    let clickedInside = clickIsInside(this.element, e.target)
+    let clickedInside = this.element.contains(e.target)
 
     if (clickedInside && !isEditing) {
       /*
@@ -71,10 +62,11 @@ export default Component.extend({
   },
 
   _setFieldWidth () {
-    let editor = $(this.element)
-    let width = htmlSafe(`width: ${(editor.width() + 2)}px`)
+    const { width } = this.element.getBoundingClientRect()
 
-    run(this, () => set(this, 'fieldWidth', width))
+    run(this, () => {
+      set(this, 'fieldWidth', htmlSafe(`width: ${(width + 2)}px`))
+    })
   },
 
   didReceiveAttrs () {

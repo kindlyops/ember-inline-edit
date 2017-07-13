@@ -237,20 +237,26 @@ test('on pressing esc, it sends the close action', function (assert) {
 })
 
 test('the text field is the same width as the original element', function(assert){
-    this.render(hbs`{{ember-inline-edit
-                        value='A long field value, probably at least a few hundred pixels'
-                        onSave="onSave"
-                        onClose="onClose"
-                        onCancel="onCancel"}}`);
+  this.render(hbs`{{ember-inline-edit
+                      value='A long field value, probably at least a few hundred pixels'
+                      onSave="onSave"
+                      onClose="onClose"
+                      onCancel="onCancel"}}`);
 
-    assert.equal(this.$('.ember-inline-edit-input').length, 0)
+  assert.equal(this.$('.ember-inline-edit-input').length, 0)
 
-    let width = this.$('.ember-inline-edit').width();
+  let { width } = document
+    .querySelector('.ember-inline-edit')
+    .getBoundingClientRect()
 
-    this.$('.ember-inline-edit').click()
+  this.$('.ember-inline-edit').click()
 
-    assert.equal(this.$('.ember-inline-edit-input').width(), width + 2)
+  let inputWidth = document
+    .querySelector('.ember-inline-edit-input')
+    .style
+    .width
 
+  assert.equal(inputWidth, `${width + 2}px`)
 })
 
 test('on click, it does nothing if not enabled', function (assert) {
