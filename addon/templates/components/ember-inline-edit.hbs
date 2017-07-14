@@ -33,6 +33,7 @@
 {{else}}
   {{#if isEditing}}
     {{ember-inline-editor
+      isVisible=isEditing
       value=(readonly value)
       field=field
       fieldWidth=fieldWidth
@@ -51,6 +52,7 @@
     }}
   {{else}}
     {{ember-inline-editable
+      isVisible=isNotEditing
       value=(readonly value)
       placeholder=placeholder
       showEditButton=showEditButton
