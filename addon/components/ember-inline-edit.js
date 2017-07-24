@@ -22,6 +22,7 @@ export default Component.extend({
   placeholder: "Not Provided",
   saveLabel: "Save",
   cancelLabel: "Cancel",
+  editLabel: "Edit",
 
   fieldWidth: null,
 
