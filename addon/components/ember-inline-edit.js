@@ -88,6 +88,7 @@ export default Component.extend({
 
     startEditing(e) {
       e.stopPropagation()
+      this.sendAction("onEdit")
 
       run(this, () => {
         set(this, "previousValue", this.get("value"))
