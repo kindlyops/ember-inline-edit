@@ -26,7 +26,7 @@ export default Component.extend({
   },
 
   focusOnInput() {
-    const children = this.element.childNodes
+    const children = [...this.element.children]
 
     children.forEach(child => {
       if (isInputField(child)) child.focus()
