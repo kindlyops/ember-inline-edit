@@ -1,6 +1,6 @@
 {
   "name": "ember-inline-edit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple inline editing component for ember.js apps with keyboard support.",
   "keywords": [
     "ember-addon",
