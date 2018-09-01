@@ -1,9 +1,13 @@
 {
   "name": "ember-inline-edit",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "1.0.1",
+  "description": "Simple inline editing component for ember.js apps with keyboard support.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember",
+    "inline edit",
+    "ember.js",
+    "inline editing"
   ],
   "repository": "",
   "license": "MIT",
@@ -56,6 +60,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "http://swastik.github.io/ember-inline-edit"
   }
 }
