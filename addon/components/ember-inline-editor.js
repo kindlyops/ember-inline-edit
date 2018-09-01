@@ -21,6 +21,7 @@ export default Component.extend({
   textAreaFields: ['textarea'],
 
   didReceiveAttrs() {
+    this._super(...arguments)
     scheduleOnce('afterRender', this.focusOnInput.bind(this))
   },
 
