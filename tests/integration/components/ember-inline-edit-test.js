@@ -3,7 +3,7 @@ import { setupRenderingTest } from "ember-qunit";
 import { render, triggerEvent } from '@ember/test-helpers';
 import hbs from "htmlbars-inline-precompile"
 
-import { fillIn, click, find, keyEvent } from "ember-native-dom-helpers"
+import { fillIn, click, find, triggerKeyEvent } from "@ember/test-helpers"
 
 module("Integration | Component | ember inline edit", function(hooks) {
   setupRenderingTest(hooks);
@@ -162,7 +162,7 @@ module("Integration | Component | ember inline edit", function(hooks) {
 
     await click(classNames.container)
     await fillIn(classNames.input, "Something Else")
-    await keyEvent(classNames.input, "keyup", 13)
+    await triggerKeyEvent(classNames.input, "keyup", 13)
 
     assert.equal(this.get("value"), "Something Else")
     assert.notOk(find(classNames.input))
@@ -179,7 +179,7 @@ module("Integration | Component | ember inline edit", function(hooks) {
 
     await click(classNames.container)
     await fillIn(classNames.input, "Something")
-    await keyEvent(classNames.input, "keyup", 13)
+    await triggerKeyEvent(classNames.input, "keyup", 13)
 
     assert.ok(find(classNames.input))
   })
@@ -215,7 +215,7 @@ module("Integration | Component | ember inline edit", function(hooks) {
     assert.ok(find(classNames.input))
 
     await triggerEvent(".ember-inline-edit-input", "esc")
-    await keyEvent(classNames.input, "keyup", 27)
+    await triggerKeyEvent(classNames.input, "keyup", 27)
 
     assert.notOk(find(classNames.input))
   })
