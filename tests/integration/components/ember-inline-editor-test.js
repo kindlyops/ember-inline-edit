@@ -1,9 +1,12 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit'
+import { setupRenderingTest } from 'ember-qunit'
 
-moduleForComponent('ember-inline-editor', 'Integration | Component | ember inline editor', {
-  integration: true
-});
+import '@ember/test-helpers'
 
-test('it renders', function(assert) {
-  assert.expect(0)
-});
+module('Integration | Component | ember inline editor', function(hooks) {
+  setupRenderingTest(hooks)
+
+  test('it renders', function(assert) {
+    assert.expect(0)
+  })
+})
