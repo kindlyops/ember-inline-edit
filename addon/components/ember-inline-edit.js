@@ -36,6 +36,8 @@ export default Component.extend({
   cancelButtonClass: "",
 
   didInsertElement() {
+    this._super(...arguments);
+
     this._handleClicks = this._handleClicks.bind(this)
     document.addEventListener("click", this._handleClicks)
   },
@@ -78,7 +80,7 @@ export default Component.extend({
 
   actions: {
     save() {
-      this.sendAction("onSave", this.value)
+      this.onSave(this.value)
 
       run(this, () => {
         set(this, "isEditing", false)
@@ -87,7 +89,7 @@ export default Component.extend({
 
     startEditing(e) {
       e.stopPropagation()
-      this.sendAction("onEdit")
+      this.onEdit()
 
       run(this, () => {
         set(this, "previousValue", this.value)
@@ -96,7 +98,7 @@ export default Component.extend({
     },
 
     cancel() {
-      this.sendAction("onCancel")
+      this.onCancel()
 
       run(this, () => {
         set(this, "value", this.previousValue)

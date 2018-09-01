@@ -40,9 +40,9 @@ export default Component.extend({
     const isEsc = keyCode === 27
 
     if (isEnter && !textAreaFields.includes(field)) {
-      this.sendAction("on-save")
+      this['on-save']()
     } else if (isEsc) {
-      this.sendAction("on-cancel")
+      this['on-cancel']()
     }
   }
 })
