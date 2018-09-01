@@ -36,8 +36,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   test("it renders", async function(assert) {
     await render(hbs`{{ember-inline-edit
                           value=value
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     assert.ok(find(classNames.container))
   })
@@ -45,8 +45,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   test("the label is default", async function(assert) {
     await render(hbs`{{ember-inline-edit
                           value=value
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     assert.equal(find(classNames.container).innerText.trim(), "Not Provided")
   })
@@ -54,8 +54,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   test("on click, it shows the input and buttons", async function(assert) {
     await render(hbs`{{ember-inline-edit
                           value=value
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     assert.notOk(find(classNames.input))
     assert.notOk(find(classNames.saveBtn))
@@ -71,8 +71,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   test("on click, the input gets focus", async function(assert) {
     await render(hbs`{{ember-inline-edit
                           value=value
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
 
@@ -85,8 +85,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
     await render(hbs`{{ember-inline-edit
                           value=value
                           showSaveButton=false
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     assert.notOk(find(classNames.saveBtn))
@@ -96,8 +96,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
     await render(hbs`{{ember-inline-edit
                           value=value
                           showCancelButton=false
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     assert.notOk(find(classNames.cancelBtn))
@@ -107,8 +107,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
     await render(hbs`{{ember-inline-edit
                           value=value
                           saveLabel="✓"
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     assert.equal(find(classNames.saveBtn).innerText.trim(), "✓")
@@ -118,8 +118,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
     await render(hbs`{{ember-inline-edit
                           value=value
                           cancelLabel="x"
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     assert.equal(find(classNames.cancelBtn).innerText.trim(), "x")
@@ -129,8 +129,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
     await render(hbs`{{ember-inline-edit
                           value=value
                           hintLabel="press Enter to save"
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     assert.notOk(find(classNames.hint))
     await click(classNames.container)
@@ -142,8 +142,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   test("on save, it sends the save action", async function(assert) {
     await render(hbs`{{ember-inline-edit
                           value=value
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     await fillIn(classNames.input, "Something")
@@ -157,8 +157,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   ) {
     await render(hbs`{{ember-inline-edit
                           value=(readonly value)
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     await fillIn(classNames.input, "Something Else")
@@ -174,8 +174,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
     await render(hbs`{{ember-inline-edit
                       value=value
                       field="textarea"
-                      onSave="onSave"
-                      onCancel="onCancel"}}`)
+                      onSave=(action "onSave")
+                      onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     await fillIn(classNames.input, "Something")
@@ -189,8 +189,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   ) {
     await render(hbs`{{ember-inline-edit
                           value=value
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     await click(classNames.container)
     await fillIn(classNames.input, "Some initial value")
@@ -206,8 +206,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   test("on pressing esc, it sends the close action", async function(assert) {
     await render(hbs`{{ember-inline-edit
                           value=value
-                          onSave="onSave"
-                          onCancel="onCancel"}}`)
+                          onSave=(action "onSave")
+                          onCancel=(action "onCancel")}}`)
 
     assert.notOk(find(classNames.input))
 
@@ -225,8 +225,8 @@ module("Integration | Component | ember inline edit", function(hooks) {
   ) {
     await render(hbs`{{ember-inline-edit
                         value='A long field value, probably at least a few hundred pixels'
-                        onSave="onSave"
-                        onCancel="onCancel"}}`)
+                        onSave=(action "onSave")
+                        onCancel=(action "onCancel")}}`)
 
     assert.notOk(find(classNames.input))
 
