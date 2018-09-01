@@ -1,5 +1,5 @@
 import Component from "@ember/component"
-import { get, set, computed } from "@ember/object"
+import { set, computed } from "@ember/object"
 import { htmlSafe } from "@ember/string"
 import { run } from "@ember/runloop"
 
@@ -45,14 +45,13 @@ export default Component.extend({
   },
 
   _handleClicks(ev) {
-    let enabled = get(this, "enabled")
-    if (!enabled) return
+    if (!this.enabled) return
 
-    let isEditing = get(this, "isEditing")
+    let { isEditing } = this
     let clickedInside = this.element.contains(ev.target)
 
     if (clickedInside && !isEditing) {
-      if (get(this, "showEditButton")) {
+      if (this.showEditButton) {
         return
       }
 
@@ -72,14 +71,14 @@ export default Component.extend({
   },
 
   didReceiveAttrs() {
-    if (get(this, "enabled") === false) {
+    if (this.enabled === false) {
       this.send("cancel")
     }
   },
 
   actions: {
     save() {
-      this.sendAction("onSave", this.get("value"))
+      this.sendAction("onSave", this.value)
 
       run(this, () => {
         set(this, "isEditing", false)
@@ -91,7 +90,7 @@ export default Component.extend({
       this.sendAction("onEdit")
 
       run(this, () => {
-        set(this, "previousValue", this.get("value"))
+        set(this, "previousValue", this.value)
         set(this, "isEditing", true)
       })
     },
@@ -100,7 +99,7 @@ export default Component.extend({
       this.sendAction("onCancel")
 
       run(this, () => {
-        set(this, "value", this.get("previousValue"))
+        set(this, "value", this.previousValue)
         set(this, "isEditing", false)
       })
     }

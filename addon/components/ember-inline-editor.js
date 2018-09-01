@@ -1,5 +1,4 @@
 import Component from "@ember/component"
-import { get } from "@ember/object"
 import { scheduleOnce } from "@ember/runloop"
 
 import layout from "../templates/components/ember-inline-editor"
@@ -34,9 +33,7 @@ export default Component.extend({
   },
 
   keyUp(ev) {
-    const field = get(this, "field")
-    const textAreaFields = get(this, "textAreaFields")
-
+    const { field, textAreaFields } = this
     const { keyCode } = ev
 
     const isEnter = keyCode === 13
