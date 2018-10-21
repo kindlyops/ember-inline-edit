@@ -74,7 +74,7 @@ export default Component.extend({
   },
 
   didReceiveAttrs() {
-    if (this.enabled === false) {
+    if (this.enabled === false && this.isEditing) {
       this.send('cancel')
     }
   },
