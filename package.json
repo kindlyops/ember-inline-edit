@@ -9,7 +9,7 @@
     "ember.js",
     "inline editing"
   ],
-  "repository": "",
+  "repository": "https://github.com/swastik/ember-inline-edit",
   "license": "MIT",
   "author": "",
   "directories": {
