@@ -269,7 +269,7 @@ module('Integration | Component | ember inline edit', function(hooks) {
   })
 
   test('on outside click, if `onOutsideClick` returns a truthy value, the editor is closed', async function(assert) {
-    assert.expect(5)
+    assert.expect(4)
 
     this.set('onOutsideClick', () => {
       assert.ok(true, 'got the onOutsideClick action')
@@ -277,7 +277,7 @@ module('Integration | Component | ember inline edit', function(hooks) {
     })
 
     this.set('onCancel', () => {
-      assert.ok(true, 'got the onCancel action')
+      assert.notOk(true, 'got the onCancel action but was not supposed to')
     })
 
     await render(hbs`

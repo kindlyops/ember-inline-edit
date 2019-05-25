@@ -24,7 +24,8 @@
       <p class="f6">
         If you want more control over this, you can use the <code>onOutsideClick</code> action. With this defined, <code>onCancel</code> will not be called
         when a user clicks outside the editor... instead, the editor will stay in the edit mode and you will get the <code>onOutsideClick</code>
-        action to handle it the way you want.
+        action with the current value to handle it the way you want. If you return a truthy value from the <code>onOutsideClick</code> action, the editor will be closed, otherwise
+        it will stay open.
       </p>
     </li>
   </ul>
