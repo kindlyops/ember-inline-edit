@@ -61,7 +61,11 @@ export default Component.extend({
       this._setFieldWidth()
       this.send('startEditing', ev)
     } else if (!clickedInside && isEditing) {
-      this.send('cancel')
+      if (this.onOutsideClick) {
+        this.onOutsideClick(this.value) && set(this, 'isEditing', false)
+      } else {
+        this.send('cancel')
+      }
     }
   },
 

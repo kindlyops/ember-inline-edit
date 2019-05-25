@@ -1,7 +1,7 @@
 <div class="introduction f5">
   <h6 class="ttu tracked">Handling Actions</h6>
 
-  <p>There are two actions that you can expect:</p>
+  <p>There are three actions that you can expect:</p>
 
   <ul>
     <li>
@@ -12,6 +12,21 @@
     <li>
       <code class="navy">onCancel()</code>
       <p class="f6">When a user clicks the Cancel button or hits the Esc key, you'll get the onCancel action with no arguments.</p>
+    </li>
+
+    <li>
+      <code class="navy">onOutsideClick()</code> <small class="silver"> optional </small>
+      <p class="f6">
+        By default, when a user is in the edit mode and clicks anywhere outside the editor, <code>onCancel</code> is called and the editor
+        is closed.
+      </p>
+
+      <p class="f6">
+        If you want more control over this, you can use the <code>onOutsideClick</code> action. With this defined, <code>onCancel</code> will not be called
+        when a user clicks outside the editor... instead, the editor will stay in the edit mode and you will get the <code>onOutsideClick</code>
+        action with the current value to handle it the way you want. If you return a truthy value from the <code>onOutsideClick</code> action, the editor will be closed, otherwise
+        it will stay open.
+      </p>
     </li>
   </ul>
 </div>
