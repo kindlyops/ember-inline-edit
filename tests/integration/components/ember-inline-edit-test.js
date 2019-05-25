@@ -268,6 +268,36 @@ module('Integration | Component | ember inline edit', function(hooks) {
     assert.dom(classNames.input).exists('still in edit mode')
   })
 
+  test('on outside click, if `onOutsideClick` returns a truthy value, the editor is closed', async function(assert) {
+    assert.expect(5)
+
+    this.set('onOutsideClick', () => {
+      assert.ok(true, 'got the onOutsideClick action')
+      return true
+    })
+
+    this.set('onCancel', () => {
+      assert.ok(true, 'got the onCancel action')
+    })
+
+    await render(hbs`
+    {{ember-inline-edit
+      value=value
+      onOutsideClick=onOutsideClick
+      onCancel=onCancel}}
+
+    <div class="outside-element"></div>
+    `)
+
+    assert.dom(classNames.input).doesNotExist('does not start in edit mode')
+
+    await click(classNames.container)
+    assert.dom(classNames.input).exists('goes into edit mode')
+
+    await click('.outside-element')
+    assert.dom(classNames.input).doesNotExist('goes out of edit mode')
+  })
+
   test('the text field is the same width as the original element', async function(assert) {
     await render(hbs`{{ember-inline-edit
                         value='A long field value, probably at least a few hundred pixels'

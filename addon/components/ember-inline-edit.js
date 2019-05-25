@@ -62,7 +62,7 @@ export default Component.extend({
       this.send('startEditing', ev)
     } else if (!clickedInside && isEditing) {
       if (this.onOutsideClick) {
-        this.onOutsideClick()
+        this.onOutsideClick() && this.send('cancel')
       } else {
         this.send('cancel')
       }
