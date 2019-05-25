@@ -1,9 +1,0 @@
-machine:
-  node:
-    version: 6.9.0
-
-dependencies:
-  pre:
-    - npm install
-  cache_directories:
-    - "node_modules"
