@@ -1,7 +1,7 @@
 <div class="introduction f5">
   <h6 class="ttu tracked">Handling Actions</h6>
 
-  <p>There are two actions that you can expect:</p>
+  <p>There are three actions that you can expect:</p>
 
   <ul>
     <li>
@@ -12,6 +12,14 @@
     <li>
       <code class="navy">onCancel()</code>
       <p class="f6">When a user clicks the Cancel button or hits the Esc key, you'll get the onCancel action with no arguments.</p>
+    </li>
+
+    <li>
+      <code class="navy">onOutsideClick()</code> <small class="silver"> optional </small>
+      <p class="f6">
+        When a user is in edit mode and clicks anywhere outside the editor, this action will be called if you've defined it.
+        If this is defined, <code>onCancel</code> action is not called on clicks outside the editor.
+      </p>
     </li>
   </ul>
 </div>
