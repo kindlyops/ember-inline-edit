@@ -1028,8 +1028,8 @@ bower-endpoint-parser@0.2.2:
   resolved "https://registry.yarnpkg.com/bower-endpoint-parser/-/bower-endpoint-parser-0.2.2.tgz#00b565adbfab6f2d35addde977e97962acbcb3f6"
 
 bower@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/bower/-/bower-1.8.0.tgz#55dbebef0ad9155382d9e9d3e497c1372345b44a"
+  version "1.8.8"
+  resolved "https://registry.yarnpkg.com/bower/-/bower-1.8.8.tgz#82544be34a33aeae7efb8bdf9905247b2cffa985"
 
 brace-expansion@^1.0.0:
   version "1.1.11"
@@ -2721,7 +2721,7 @@ eslint-visitor-keys@^1.0.0:
 
 eslint@^4.0.0:
   version "4.19.1"
-  resolved "http://registry.npmjs.org/eslint/-/eslint-4.19.1.tgz#32d1d653e1d90408854bfb296f076ec7e186a300"
+  resolved "https://registry.npmjs.org/eslint/-/eslint-4.19.1.tgz#32d1d653e1d90408854bfb296f076ec7e186a300"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -2950,7 +2950,7 @@ external-editor@^1.1.0:
 
 external-editor@^2.0.4:
   version "2.2.0"
-  resolved "http://registry.npmjs.org/external-editor/-/external-editor-2.2.0.tgz#045511cfd8d133f3846673d1047c154e214ad3d5"
+  resolved "https://registry.npmjs.org/external-editor/-/external-editor-2.2.0.tgz#045511cfd8d133f3846673d1047c154e214ad3d5"
   dependencies:
     chardet "^0.4.0"
     iconv-lite "^0.4.17"
@@ -4543,7 +4543,7 @@ mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1:
 
 mkdirp@^0.3.5:
   version "0.3.5"
-  resolved "http://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz#de3e5f8961c88c787ee1368df849ac4413eca8d7"
+  resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz#de3e5f8961c88c787ee1368df849ac4413eca8d7"
 
 mktemp@~0.4.0:
   version "0.4.0"
