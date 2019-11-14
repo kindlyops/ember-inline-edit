@@ -9,7 +9,7 @@
     "ember.js",
     "inline editing"
   ],
-  "repository": "https://github.com/swastik/ember-inline-edit",
+  "repository": "https://github.com/kindlyops/ember-inline-edit",
   "license": "MIT",
   "author": "",
   "directories": {
@@ -61,6 +61,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://swastik.github.io/ember-inline-edit"
+    "demoURL": "http://kindlyops.github.io/ember-inline-edit"
   }
 }
