@@ -29,6 +29,7 @@ export default Component.extend({
 
   showSaveButton: true,
   showCancelButton: true,
+  saveOnFocusOut: false,
 
   editorClass: '',
   buttonContainerClass: '',
@@ -64,7 +65,11 @@ export default Component.extend({
       if (this.onOutsideClick) {
         this.onOutsideClick(this.value) && set(this, 'isEditing', false)
       } else {
-        this.send('cancel')
+        if(this.saveOnFocusOut) {
+          this.send('save')
+        } else {
+          this.send('cancel')
+        }
       }
     }
   },
