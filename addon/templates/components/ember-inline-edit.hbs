@@ -1,63 +1,64 @@
 {{#if hasBlockParams}}
   {{yield (hash
       editor=(component 'ember-inline-editor'
-        isVisible=isEditing
-        value=(readonly value)
-        field=field
-        fieldWidth=fieldWidth
-        showSaveButton=showSaveButton
-        showCancelButton=showCancelButton
-        saveLabel=saveLabel
-        cancelLabel=cancelLabel
-        editorClass=editorClass
-        buttonContainerClass=buttonContainerClass
-        saveButtonClass=saveButtonClass
-        cancelButtonClass=cancelButtonClass
-        hintLabel=hintLabel
-        on-update=(action (mut value))
+        isVisible=this.isEditing
+        value=(readonly this.value)
+        field=this.field
+        fieldWidth=this.fieldWidth
+        showSaveButton=this.showSaveButton
+        showCancelButton=this.showCancelButton
+        saveLabel=this.saveLabel
+        cancelLabel=this.cancelLabel
+        editorClass=this.editorClass
+        buttonContainerClass=this.buttonContainerClass
+        saveButtonClass=this.saveButtonClass
+        cancelButtonClass=this.cancelButtonClass
+        hintLabel=this.hintLabel
+        on-update=(action (mut this.value))
         on-save=(action "save")
         on-cancel=(action "cancel")
         )
 
       editable=(component 'ember-inline-editable'
-        isVisible=isNotEditing
-        value=(readonly value)
-        placeholder=placeholder
-        showEditButton=showEditButton
-        editButtonClass=editButtonClass
+        isVisible=this.isNotEditing
+        value=(readonly this.value)
+        placeholder=this.placeholder
+        showEditButton=this.showEditButton
+        editButtonClass=this.editButtonClass
         on-edit=(action "startEditing")
         )
       )
-    (action "save") (action "cancel")
+    (action "save")
+    (action "cancel")
     }}
 {{else}}
-  {{#if isEditing}}
+  {{#if this.isEditing}}
     {{ember-inline-editor
-      isVisible=isEditing
-      value=(readonly value)
-      field=field
-      fieldWidth=fieldWidth
-      showSaveButton=showSaveButton
-      showCancelButton=showCancelButton
-      saveLabel=saveLabel
-      cancelLabel=cancelLabel
-      editorClass=editorClass
-      buttonContainerClass=buttonContainerClass
-      saveButtonClass=saveButtonClass
-      cancelButtonClass=cancelButtonClass
-      hintLabel=hintLabel
-      on-update=(action (mut value))
+      isVisible=this.isEditing
+      value=(readonly this.value)
+      field=this.field
+      fieldWidth=this.fieldWidth
+      showSaveButton=this.showSaveButton
+      showCancelButton=this.showCancelButton
+      saveLabel=this.saveLabel
+      cancelLabel=this.cancelLabel
+      editorClass=this.editorClass
+      buttonContainerClass=this.buttonContainerClass
+      saveButtonClass=this.saveButtonClass
+      cancelButtonClass=this.cancelButtonClass
+      hintLabel=this.hintLabel
+      on-update=(action (mut this.value))
       on-save=(action "save")
       on-cancel=(action "cancel")
     }}
   {{else}}
     {{ember-inline-editable
-      isVisible=isNotEditing
-      value=(readonly value)
-      placeholder=placeholder
-      editLabel=editLabel
-      showEditButton=showEditButton
-      editButtonClass=editButtonClass
+      isVisible=this.isNotEditing
+      value=(readonly this.value)
+      placeholder=this.placeholder
+      editLabel=this.editLabel
+      showEditButton=this.showEditButton
+      editButtonClass=this.editButtonClass
       on-edit=(action "startEditing")
       }}
   {{/if}}

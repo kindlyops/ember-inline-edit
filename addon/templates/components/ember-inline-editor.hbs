@@ -1,40 +1,40 @@
 {{#if hasBlock}}
   {{yield}}
 {{else}}
-  {{#if (in-arr textFields field)}}
+  {{#if (in-arr this.textFields this.field)}}
     <input
-      type={{field}}
-      value={{value}}
-      class="ember-inline-edit-input {{editorClass}}"
-      oninput={{action attrs.on-update value="target.value"}}
-      style={{fieldWidth}} />
-  {{else if (in-arr textAreaFields field)}}
+      type={{this.field}}
+      value={{this.value}}
+      class="ember-inline-edit-input {{this.editorClass}}"
+      oninput={{action this.attrs.on-update value="target.value"}}
+      style={{this.fieldWidth}} />
+  {{else if (in-arr this.textAreaFields this.field)}}
     <textarea
-      value={{value}}
-      class="ember-inline-edit-input {{editorClass}}"
-      oninput={{action attrs.on-update value="target.value"}}>
+      value={{this.value}}
+      class="ember-inline-edit-input {{this.editorClass}}"
+      oninput={{action this.attrs.on-update value="target.value"}}>
     </textarea>
   {{/if}}
 {{/if}}
 
-<div class="ember-inline-button-container {{buttonContainerClass}}">
-  {{#if showSaveButton}}
+<div class="ember-inline-button-container {{this.buttonContainerClass}}">
+  {{#if this.showSaveButton}}
     <button
-      {{action attrs.on-save bubbles=false}}
-      class="ember-inline-edit-save {{saveButtonClass}}">
-      {{saveLabel}}
+      {{action this.attrs.on-save bubbles=false}}
+      class="ember-inline-edit-save {{this.saveButtonClass}}">
+      {{this.saveLabel}}
     </button>
   {{/if}}
 
-  {{#if showCancelButton}}
+  {{#if this.showCancelButton}}
     <button
-      {{action attrs.on-cancel bubbles=false}}
-      class="ember-inline-edit-cancel {{cancelButtonClass}}">
-      {{cancelLabel}}
+      {{action this.attrs.on-cancel bubbles=false}}
+      class="ember-inline-edit-cancel {{this.cancelButtonClass}}">
+      {{this.cancelLabel}}
     </button>
   {{/if}}
 </div>
 
-{{#if hintLabel}}
-  <span class="hint">{{{hintLabel}}}</span>
+{{#if this.hintLabel}}
+  <span class="hint">{{{this.hintLabel}}}</span>
 {{/if}}
