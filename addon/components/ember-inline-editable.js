@@ -7,9 +7,8 @@ export default Component.extend({
   layout,
 
   classNames: ['ember-inline-editable'],
-  classNameBindings: [
-    'isVisible:is-visible:is-hidden',
-    'showEditButton:is-not-clickable'
-  ],
+  classNameBindings: ['showEditButton:is-not-clickable'],
+  shouldHide: false,
+  attributeBindings: ['shouldHide:hidden'],
   valueIsEmpty: computed.empty('value')
 })

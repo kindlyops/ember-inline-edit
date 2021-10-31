@@ -1,7 +1,7 @@
 {{#if (has-block-params)}}
   {{yield (hash
       editor=(component 'ember-inline-editor'
-        isVisible=isEditing
+        shouldHide=isNotEditing
         value=(readonly value)
         field=field
         fieldWidth=fieldWidth
@@ -20,7 +20,7 @@
         )
 
       editable=(component 'ember-inline-editable'
-        isVisible=isNotEditing
+        shouldHide=isEditing
         value=(readonly value)
         placeholder=placeholder
         showEditButton=showEditButton
@@ -33,7 +33,6 @@
 {{else}}
   {{#if isEditing}}
     {{ember-inline-editor
-      isVisible=isEditing
       value=(readonly value)
       field=field
       fieldWidth=fieldWidth
@@ -52,7 +51,6 @@
     }}
   {{else}}
     {{ember-inline-editable
-      isVisible=isNotEditing
       value=(readonly value)
       placeholder=placeholder
       editLabel=editLabel

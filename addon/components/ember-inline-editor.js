@@ -15,7 +15,8 @@ const isInputField = el => {
 
 export default Component.extend({
   layout,
-  classNameBindings: ['isVisible:is-visible:is-hidden'],
+  shouldHide: false,
+  attributeBindings: ['shouldHide:hidden'],
 
   textFields: ['search', 'url', 'text', 'phone', 'email', 'number'],
   textAreaFields: ['textarea'],
