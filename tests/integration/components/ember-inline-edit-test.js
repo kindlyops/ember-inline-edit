@@ -386,22 +386,22 @@ module('Integration | Component | ember inline edit', function(hooks) {
                     {{/ember-inline-edit}}`)
 
     assert.ok(
-      find('.editor').classList.contains('is-hidden'),
+      find('.editor').hasAttribute('hidden'),
       'editor is hidden by default'
     )
     assert.ok(
-      find('.editable').classList.contains('is-visible'),
+      !find('.editable').hasAttribute('hidden'),
       'editable is visible by default'
     )
 
     await click('.editor')
 
     assert.ok(
-      find('.editor').classList.contains('is-visible'),
+      !find('.editor').hasAttribute('hidden'),
       'editor is visible after click'
     )
     assert.ok(
-      find('.editable').classList.contains('is-hidden'),
+      find('.editable').hasAttribute('hidden'),
       'editable is hidden after click'
     )
   })
