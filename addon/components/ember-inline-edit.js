@@ -2,7 +2,6 @@ import Component from '@ember/component'
 import { set, computed } from '@ember/object'
 import { htmlSafe } from '@ember/string'
 import { run } from '@ember/runloop'
-import { tryInvoke } from '@ember/utils'
 
 import layout from '../templates/components/ember-inline-edit'
 
@@ -90,8 +89,7 @@ export default Component.extend({
 
   actions: {
     save() {
-      tryInvoke(this, 'onSave', [this.value])
-
+      this.onSave?.(this.value);
       run(this, () => {
         set(this, 'isEditing', false)
       })
@@ -99,7 +97,7 @@ export default Component.extend({
 
     startEditing(e) {
       e.stopPropagation()
-      tryInvoke(this, 'onEdit')
+      this.onEdit?.()
 
       run(this, () => {
         set(this, 'previousValue', this.value)
@@ -108,7 +106,7 @@ export default Component.extend({
     },
 
     cancel() {
-      tryInvoke(this, 'onCancel')
+      this.onCancel?.()
 
       run(this, () => {
         set(this, 'value', this.previousValue)
