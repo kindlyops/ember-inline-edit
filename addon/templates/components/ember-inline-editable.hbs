@@ -1,17 +1,17 @@
 {{#if (has-block)}}
   {{yield}}
 {{else}}
-  {{#if valueIsEmpty}}
+  {{#if this.valueIsEmpty}}
     <span class="gray-text">
-      {{placeholder}}
+      {{this.placeholder}}
     </span>
   {{else}}
-    {{value}}
+    {{this.value}}
   {{/if}}
 
-  {{#if showEditButton}}
-    <span onclick={{action attrs.on-edit}} class="ember-inline-edit-toggle-btn {{editButtonClass}}">
-      {{editLabel}}
+  {{#if this.showEditButton}}
+    <span onclick={{action this.attrs.on-edit}} class="ember-inline-edit-toggle-btn {{this.editButtonClass}}">
+      {{this.editLabel}}
     </span>
   {{/if}}
 {{/if}}
