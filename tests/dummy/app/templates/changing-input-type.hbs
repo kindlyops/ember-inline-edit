@@ -27,10 +27,11 @@
   </p>
 
   {{#x-card type="Example"}}
-    {{ember-inline-edit
+    <EmberInlineEdit
       class="fl w-50"
-      field='textarea'
-      onSave=(action 'onSave' target=applicationController)
-      value=(readonly value)}}
+      @field="textarea"
+      @value={{readonly this.value}}
+      @onSave={{this.onSave}}
+    />
   {{/x-card}}
 </div>

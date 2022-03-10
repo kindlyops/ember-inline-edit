@@ -1,4 +1,4 @@
-{{ember-inline-edit
-  value=(readonly value)
-  onSave=(action 'onSave')
-}}
+<EmberInlineEdit
+  @value={{readonly this.value}}
+  @onSave={{this.onSave}}
+/>
