@@ -14,10 +14,11 @@
   <p>Here's an example:</p>
 
   {{#x-card type="Example"}}
-    {{ember-inline-edit
+    <EmberInlineEdit
       class="fl w-50"
-      onSave=(action 'onSave' target=applicationController)
-      value=(readonly value)}}
+      @value={{readonly this.value}}
+      @onSave={{this.onSave}}
+    />
   {{/x-card}}
 
   <p>You can click on the value above, change it, save it, or close it by pressing the esc key.</p>
