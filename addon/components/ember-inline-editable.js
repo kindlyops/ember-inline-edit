@@ -1,5 +1,5 @@
 import Component from '@ember/component'
-import { computed } from '@ember/object'
+import { empty } from '@ember/object/computed'
 
 import layout from '../templates/components/ember-inline-editable'
 
@@ -10,5 +10,5 @@ export default Component.extend({
   classNameBindings: ['showEditButton:is-not-clickable'],
   shouldHide: false,
   attributeBindings: ['shouldHide:hidden'],
-  valueIsEmpty: computed.empty('value')
+  valueIsEmpty: empty('value')
 })
