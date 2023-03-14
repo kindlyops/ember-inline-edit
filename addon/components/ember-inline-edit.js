@@ -1,6 +1,6 @@
 import Component from '@ember/component'
 import { set, computed } from '@ember/object'
-import { htmlSafe } from '@ember/string'
+import { htmlSafe } from '@ember/template'
 import { run } from '@ember/runloop'
 
 import layout from '../templates/components/ember-inline-edit'
