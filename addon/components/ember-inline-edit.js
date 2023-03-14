@@ -1,5 +1,6 @@
 import Component from '@ember/component'
-import { set, computed } from '@ember/object'
+import { set } from '@ember/object'
+import { not } from '@ember/object/computed'
 import { htmlSafe } from '@ember/template'
 import { run } from '@ember/runloop'
 
@@ -11,7 +12,7 @@ export default Component.extend({
   classNameBindings: ['isEditing:is-editing', 'enabled::disabled'],
 
   isEditing: false,
-  isNotEditing: computed.not('isEditing'),
+  isNotEditing: not('isEditing'),
 
   enabled: true,
   field: 'text',
