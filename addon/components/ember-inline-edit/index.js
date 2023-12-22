@@ -44,6 +44,9 @@ export default class EmberInlineEdit extends Component {
   @localCopy('args.showCancelButton', true)
   showCancelButton;
 
+  @localCopy('args.showEditButton', false)
+  showEditButton;
+
   element = null;
 
   constructor() {
