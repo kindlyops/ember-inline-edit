@@ -29,6 +29,7 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': await getChannelURL('release'),
             'ember-resolver': '^11.0.1',
+            '@ember/string': '^3.1.1',
           },
         },
       },
@@ -38,6 +39,7 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': await getChannelURL('beta'),
             'ember-resolver': '^11.0.1',
+            '@ember/string': '^3.1.1',
           },
         },
       },
@@ -47,6 +49,7 @@ module.exports = async function () {
           devDependencies: {
             'ember-source': await getChannelURL('canary'),
             'ember-resolver': '^11.0.1',
+            '@ember/string': '^3.1.1',
           },
         },
       },
