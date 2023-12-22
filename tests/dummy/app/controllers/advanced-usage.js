@@ -1,12 +1,9 @@
-import Ember from 'ember'
-
-const {
-  Controller,
-  computed,
-  inject
-} = Ember
+import Controller, {
+  inject as controller
+} from '@ember/controller';
+import { alias } from '@ember/object/computed';
 
 export default Controller.extend({
-  applicationController: inject.controller('application'),
-  value: computed.alias('applicationController.value')
+  applicationController: controller('application'),
+  value: alias('applicationController.value')
 })

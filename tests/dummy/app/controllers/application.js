@@ -1,9 +1,4 @@
-import Ember from 'ember'
-
-const {
-  Controller,
-  Logger: { log }
-} = Ember
+import Controller from '@ember/controller';
 
 export default Controller.extend({
   value: 'Default Value',
@@ -11,12 +6,14 @@ export default Controller.extend({
 
   actions: {
     onSave (value) {
-      log('Got save action');
+      // eslint-disable-next-line no-console
+      console.log('Got save action');
       this.set('value', value)
     },
 
     onCancel () {
-      log('Got close action');
+      // eslint-disable-next-line no-console
+      console.log('Got close action');
     },
 
     enable(){
