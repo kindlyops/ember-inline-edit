@@ -1,0 +1,55 @@
+{{! template-lint-disable no-invalid-interactive }}
+<div
+  hidden={{@shouldHide}}
+  {{on 'keyup' this.handleKeyUp}}
+  {{did-insert this.registerElement}}
+  ...attributes
+>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{#if (in-arr this.textFields @field)}}
+      {{! template-lint-disable require-input-label }}
+      <input
+        type={{@field}}
+        value={{@value}}
+        class='ember-inline-edit-input {{@editorClass}}'
+        style={{@fieldWidth}}
+        {{on 'input' this.handleInput}}
+      />
+    {{else if (in-arr this.textAreaFields @field)}}
+      <textarea
+        value={{@value}}
+        class='ember-inline-edit-input {{@editorClass}}'
+        {{on 'input' this.handleInput}}
+      >
+      </textarea>
+    {{/if}}
+  {{/if}}
+
+  <div class='ember-inline-button-container {{@buttonContainerClass}}'>
+    {{#if @showSaveButton}}
+      <button
+        class='ember-inline-edit-save {{@saveButtonClass}}'
+        type='button'
+        {{on 'click' (stop-propagation @on-save)}}
+      >
+        {{@saveLabel}}
+      </button>
+    {{/if}}
+
+    {{#if @showCancelButton}}
+      <button
+        class='ember-inline-edit-cancel {{@cancelButtonClass}}'
+        type='button'
+        {{on 'click' (stop-propagation @on-cancel)}}
+      >
+        {{@cancelLabel}}
+      </button>
+    {{/if}}
+  </div>
+
+  {{#if @hintLabel}}
+    <span class='hint'>{{this.safeHintLabel}}</span>
+  {{/if}}
+</div>

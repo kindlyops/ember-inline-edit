@@ -1,37 +1,37 @@
-<div class="fl w-100 sans-serif container">
-  <aside class="fl w-20 pa2">
-    <nav class="fl w-100 mt6">
-      {{#link-to "index"}}
+<div class='fl w-100 sans-serif container'>
+  <aside class='fl w-20 pa2'>
+    <nav class='fl w-100 mt6'>
+      <LinkTo @route='index'>
         Basic Usage
-      {{/link-to}}
+      </LinkTo>
 
-      {{#link-to "handling-actions"}}
+      <LinkTo @route='handling-actions'>
         Handling Actions
-      {{/link-to}}
+      </LinkTo>
 
-      {{#link-to "changing-input-type"}}
+      <LinkTo @route='changing-input-type'>
         Changing Field
-      {{/link-to}}
+      </LinkTo>
 
-      {{#link-to "advanced-usage"}}
+      <LinkTo @route='advanced-usage'>
         Block Usage
-      {{/link-to}}
+      </LinkTo>
 
-      {{#link-to "appearance"}}
+      <LinkTo @route='appearance'>
         Customization
-      {{/link-to}}
+      </LinkTo>
     </nav>
   </aside>
 
-  <div class="fl w-50 pa2 content">
-    <h1 class="mt4 ma0 fw9">ember-inline-edit</h1>
+  <div class='fl w-50 pa2 content'>
+    <h1 class='mt4 ma0 fw9'>ember-inline-edit</h1>
 
-    <div class="p gray f4 fw5 mt3 measure lh-copy explanation">
-      ember-inline-edit is a simple component that provides inline editing for your ember.js
-      apps. It also has basic keyboard support.
+    <div class='p gray f4 fw5 mt3 measure lh-copy explanation'>
+      ember-inline-edit is a simple component that provides inline editing for
+      your ember.js apps. It also has basic keyboard support.
     </div>
 
-    <div class="lh-copy">
+    <div class='lh-copy'>
       {{outlet}}
     </div>
   </div>

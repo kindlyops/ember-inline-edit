@@ -1,33 +1,43 @@
-<div class="introduction f5">
-  <h6 class="ttu tracked">Block Usage</h6>
+<div class='introduction f5'>
+  <h6 class='ttu tracked'>Block Usage</h6>
 
   <p>
-    In case you need to go beyond the default textfields and control what shows as the editable
-    (say a header tag) and what shows as the editor (say a custom select component), you can do that too.
+    In case you need to go beyond the default textfields and control what shows
+    as the editable (say a header tag) and what shows as the editor (say a
+    custom select component), you can do that too.
   </p>
 
-  {{#x-card class="mt2" type="Code"}}
-    {{code-snippet class="code f6" name="advanced-usage.hbs"}}
-  {{/x-card}}
+  <XCard @class='mt2' @type='Code'>
+    {{!-- {{code-snippet class="code f6" name="advanced-usage.hbs"}} --}}
+    {{#let (get-code-snippet 'advanced-usage.hbs') as |snippet|}}
+      <CodeBlock
+        class='code f6'
+        @language={{snippet.language}}
+        @code={{snippet.source}}
+      />
+    {{/let}}
+  </XCard>
 
   <p>
     Here's what that will do.
   </p>
 
-  {{#x-card type="Example"}}
-    {{#ember-inline-edit value=value as |x onSave onCancel|}}
-      {{#x.editable}}
-        <h3>{{value}}</h3>
-      {{/x.editable}}
+  <XCard @type='Example'>
+    <EmberInlineEdit @value={{this.value}} as |x|>
+      <x.editable>
+        <h3>{{this.value}}</h3>
+      </x.editable>
 
-      {{#x.editor}}
-        <select onchange={{action (mut value) value="target.value"}} id="some-select" name="some-name">
-          <option value="option-1">Option 1</option>
-          <option value="option-2">Option 2</option>
+      <x.editor>
+        <select id='some-select' name='some-name' {{on 'input' this.setValue}}>
+          <option value='option-1'>Option 1</option>
+          <option value='option-2'>Option 2</option>
+          <option value='option-3'>Option 3</option>
+          <option value='option-4'>Option 4</option>
         </select>
-      {{/x.editor}}
-    {{/ember-inline-edit}}
-  {{/x-card}}
+      </x.editor>
+    </EmberInlineEdit>
+  </XCard>
 
   <p>
     In this case, you have three yielded properties:
@@ -38,11 +48,13 @@
       </li>
 
       <li>
-        <code>onSave</code> action.
+        <code>onSave</code>
+        action.
       </li>
 
       <li>
-        <code>onCancel</code> action.
+        <code>onCancel</code>
+        action.
       </li>
     </ul>
   </p>

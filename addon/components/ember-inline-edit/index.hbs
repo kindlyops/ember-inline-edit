@@ -1,0 +1,74 @@
+<div
+  class='ember-inline-edit
+    {{if this.isEditing "is-editing"}}
+    {{unless this.enabled "disabled"}}'
+  {{did-insert this.registerElement}}
+  {{did-update this.didChangeEnabled @enabled}}
+  ...attributes
+>
+  {{#if (has-block-params)}}
+    {{yield
+      (hash
+        editor=(component
+          'ember-inline-editor'
+          shouldHide=this.isNotEditing
+          value=this.value
+          field=this.field
+          fieldWidth=this.fieldWidth
+          showSaveButton=this.showSaveButton
+          showCancelButton=this.showCancelButton
+          saveLabel=this.saveLabel
+          cancelLabel=this.cancelLabel
+          editorClass=@editorClass
+          buttonContainerClass=@buttonContainerClass
+          saveButtonClass=@saveButtonClass
+          cancelButtonClass=@cancelButtonClass
+          hintLabel=@hintLabel
+          on-update=(fn (mut this.value))
+          on-save=this.save
+          on-cancel=this.cancel
+        )
+        editable=(component
+          'ember-inline-editable'
+          shouldHide=this.isEditing
+          value=(readonly this.value)
+          placeholder=this.placeholder
+          showEditButton=this.showEditButton
+          editButtonClass=@editButtonClass
+          on-edit=this.startEditing
+        )
+      )
+      this.save
+      this.cancel
+    }}
+  {{else}}
+    {{#if this.isEditing}}
+      <EmberInlineEditor
+        @value={{this.value}}
+        @field={{this.field}}
+        @fieldWidth={{this.fieldWidth}}
+        @showSaveButton={{this.showSaveButton}}
+        @showCancelButton={{this.showCancelButton}}
+        @saveLabel={{this.saveLabel}}
+        @cancelLabel={{this.cancelLabel}}
+        @editorClass={{@editorClass}}
+        @buttonContainerClass={{@buttonContainerClass}}
+        @saveButtonClass={{@saveButtonClass}}
+        @cancelButtonClass={{@cancelButtonClass}}
+        @hintLabel={{@hintLabel}}
+        @on-update={{fn (mut this.value)}}
+        @on-save={{this.save}}
+        @on-cancel={{this.cancel}}
+      />
+    {{else}}
+      <EmberInlineEditable
+        @value={{this.value}}
+        @placeholder={{this.placeholder}}
+        @editLabel={{this.editLabel}}
+        @showEditButton={{this.showEditButton}}
+        @editButtonClass={{@editButtonClass}}
+        @on-edit={{this.startEditing}}
+      />
+    {{/if}}
+  {{/if}}
+</div>

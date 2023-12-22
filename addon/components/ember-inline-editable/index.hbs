@@ -1,0 +1,27 @@
+<div
+  class='ember-inline-editable {{if @showEditButton "is-not-clickable"}}'
+  hidden={{@shouldHide}}
+  ...attributes
+>
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    {{#if this.valueIsEmpty}}
+      <span class='gray-text'>
+        {{@placeholder}}
+      </span>
+    {{else}}
+      {{@value}}
+    {{/if}}
+
+    {{#if @showEditButton}}
+      <span
+        role='button'
+        {{on 'click' @on-edit}}
+        class='ember-inline-edit-toggle-btn {{@editButtonClass}}'
+      >
+        {{@editLabel}}
+      </span>
+    {{/if}}
+  {{/if}}
+</div>

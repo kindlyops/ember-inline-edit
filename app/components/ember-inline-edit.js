@@ -1,2 +1,1 @@
-import EmberInlineEdit from 'ember-inline-edit/components/ember-inline-edit';
-export default EmberInlineEdit;
+export { default } from 'ember-inline-edit/components/ember-inline-edit/index';

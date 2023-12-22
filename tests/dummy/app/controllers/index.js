@@ -1,9 +1,6 @@
-import Controller, {
-  inject as controller
-} from '@ember/controller';
-import { readOnly } from '@ember/object/computed';
+import Controller from '@ember/controller';
+import { tracked } from '@glimmer/tracking';
 
-export default Controller.extend({
-  applicationController: controller('application'),
-  value: readOnly('applicationController.value')
-})
+export default class IndexController extends Controller {
+  @tracked value = 'Default Value';
+}

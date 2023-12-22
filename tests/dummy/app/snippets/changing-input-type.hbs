@@ -1,5 +1,5 @@
-{{ember-inline-edit
-  field='textarea'
-  value=(readonly value)
-  onSave=(action 'onSave')
-}}
+<EmberInlineEdit
+  @field='textarea'
+  @value={{this.value}}
+  @onSave={{this.onSave}}
+/>

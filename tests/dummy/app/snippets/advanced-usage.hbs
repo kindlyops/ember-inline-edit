@@ -1,15 +1,15 @@
-{{#ember-inline-edit value=value as |x onSave onCancel|}}
-  {{#x.editable}}
-    <h3>{{value}}</h3>
-  {{/x.editable}}
+{{! template-lint-disable no-unused-block-params }}
+<EmberInlineEdit @value={{this.value}} as |x onSave onCancel|>
+  <x.editable>
+    <h3>{{this.value}}</h3>
+  </x.editable>
 
-  {{#x.editor}}
-    <select
-      onchange={{action (mut value) value="target.value"}}
-      id="some-select"
-      name="some-name">
-      <option value="option-1">Option 1</option>
-      <option value="option-2">Option 2</option>
+  <x.editor>
+    <select id='some-select' name='some-name' {{on 'input' this.setValue}}>
+      <option value='option-1'>Option 1</option>
+      <option value='option-2'>Option 2</option>
+      <option value='option-3'>Option 3</option>
+      <option value='option-4'>Option 4</option>
     </select>
-  {{/x.editor}}
-{{/ember-inline-edit}}
+  </x.editor>
+</EmberInlineEdit>
