@@ -1,5 +1,5 @@
 [![Ember Observer Score](https://emberobserver.com/badges/ember-inline-edit.svg)](https://emberobserver.com/addons/ember-inline-edit)
-[![CircleCI](https://circleci.com/gh/kindlyops/ember-inline-edit.svg?style=svg)](https://circleci.com/gh/kindlyops/ember-inline-edit)
+[![CI](https://github.com/kindlyops/ember-inline-edit/actions/workflows/ci.yml/badge.svg)](https://github.com/kindlyops/ember-inline-edit/actions/workflows/ci.yml)
 [![npm version](https://badge.fury.io/js/ember-inline-edit.svg)](https://badge.fury.io/js/ember-inline-edit)
 
 # ember-inline-edit
