@@ -43,7 +43,7 @@ jobs:
           node-version: 18
           cache: yarn
       - name: Install Dependencies
-        run: <yarn install --no-lockfile
+        run: yarn install --no-lockfile
       - name: Run Tests
         run: yarn test:ember
 
